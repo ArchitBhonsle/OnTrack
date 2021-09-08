@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">OnTrack</string>
+    <string name="settings">settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="settings_name">Settings</string>
+    <string name="back_to_main_page">Back to main page</string>
+</resources>
