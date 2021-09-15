@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Habits extends Fragment {
+    // int color;
+
     public Habits() {
         // Required empty public constructor
     }

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="gray">#303030</color>
-    <color name="todo">#00D93D</color>
+    <color name="todos">#00D93D</color>
     <color name="habits">#3656FF</color>
     <color name="reminders">#FF1E6F</color>
     <color name="checkpoints">#FF8A1E</color>

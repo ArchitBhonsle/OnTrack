@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private int chooseTabColor(int position) {
             switch (position) {
                 case 0:
-                return ContextCompat.getColor(getBaseContext(), R.color.todo);
+                    return ContextCompat.getColor(getBaseContext(), R.color.todos);
                 case 1:
                     return ContextCompat.getColor(getBaseContext(), R.color.habits);
                 case 2:
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                     return R.drawable.ic_baseline_access_alarm_24;
                 case 3:
                     return R.drawable.ic_baseline_outlined_flag_24;
-                default:
+                default:  // handle this properly
                     return R.drawable.ic_baseline_check_circle_outline_24;
 
             }

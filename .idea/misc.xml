@@ -4,14 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.34322916666666664" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_30.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.34322916666666664" />
+        <entry key="app/src/main/res/drawable/top_shadow_gradient.xml" value="0.11481481481481481" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.536" />
         <entry key="app/src/main/res/layout/activity_settings.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/fragment_checkpoints.xml" value="0.1" />
         <entry key="app/src/main/res/layout/fragment_habits.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/fragment_reminders.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/fragment_todos.xml" value="0.3229166666666667" />
+        <entry key="app/src/main/res/layout/top_shadow_gradient.xml" value="0.3229166666666667" />
       </map>
     </option>
   </component>

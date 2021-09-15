@@ -3,12 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/page_padding"
     tools:context=".Todos">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Todos" />
+        android:text="Todos"
+        android:textSize="30dp" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/fab"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end|bottom"
+        android:backgroundTint="@color/white"
+        app:fabCustomSize="60dp"
+        android:elevation="5dp"
+        android:src="@drawable/ic_baseline_add_30"
+        android:tint="@color/todos"
+        android:contentDescription="Add"
+        android:layout_margin="5dp" />
 
 </FrameLayout>
