@@ -9,12 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Reminders extends Fragment {
+    public Reminders() { /* Required empty public constructor */ }
 
-    public Reminders() {
-        // Required empty public constructor
-    }
-
-    public static Reminders newInstance(String param1, String param2) {
+    public static Reminders newInstance() {
         Reminders fragment = new Reminders();
         Bundle args = new Bundle();
         fragment.setArguments(args);

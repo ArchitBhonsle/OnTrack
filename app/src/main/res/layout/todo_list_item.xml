@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    android:paddingVertical="15dp">
+    <ImageView
+        android:id="@+id/todo_list_icon"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_check_box_outline_blank_24" />
+    <TextView
+        android:id="@+id/todo_list_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/gray"
+        android:textSize="20sp"
+        android:paddingStart="15dp"
+        android:fontFamily="@font/nunito_regular" />
+</LinearLayout>

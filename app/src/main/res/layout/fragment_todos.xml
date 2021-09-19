@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/page_padding"
     tools:context=".Todos">
 
-    <TextView
+    <ListView
+        android:id="@+id/todo_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Todos"
-        android:textSize="30dp" />
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbarStyle="outsideInset"
+        android:padding="@dimen/page_padding"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -24,6 +27,6 @@
         android:src="@drawable/ic_baseline_add_30"
         android:tint="@color/todos"
         android:contentDescription="Add"
-        android:layout_margin="5dp" />
+        android:layout_margin="@dimen/page_padding" />
 
 </FrameLayout>

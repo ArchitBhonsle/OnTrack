@@ -1,19 +1,14 @@
 package com.puipuituipui.ontrack;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-public class Habits extends Fragment {
-    // int color;
+import androidx.fragment.app.Fragment;
 
-    public Habits() {
-        // Required empty public constructor
-    }
+public class Habits extends Fragment {
+    public Habits() { /* Required empty public constructor */ }
 
     public static Habits newInstance() {
         Habits fragment = new Habits();

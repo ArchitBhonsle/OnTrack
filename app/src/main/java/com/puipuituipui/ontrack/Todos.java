@@ -4,17 +4,24 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
 public class Todos extends Fragment {
+    ListView todoList;
+    Todo[] todos = {
+            new Todo(false, "AAD Literature Review"),
+            new Todo(true, "AAD Text Fields and Toast"),
+            new Todo(false, "FYP First Evaluation"),
+            new Todo(false, "AAD Intents"),
+    };
 
-    public Todos() {
-        // Required empty public constructor
-    }
+    public Todos() { /* Required empty public constructor */ }
 
-    public static Todos newInstance(String param1, String param2) {
+    public static Todos newInstance() {
         Todos fragment = new Todos();
         Bundle args = new Bundle();
         fragment.setArguments(args);
@@ -29,6 +36,12 @@ public class Todos extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_todos, container, false);
+        View view = inflater.inflate(R.layout.fragment_todos, container, false);
+
+        todoList = view.findViewById(R.id.todo_list);
+        TodoListAdapter adapter = new TodoListAdapter(view.getContext(), todos);
+        todoList.setAdapter(adapter);
+
+        return view;
     }
 }

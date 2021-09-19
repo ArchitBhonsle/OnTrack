@@ -9,11 +9,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 public class Checkpoints extends Fragment {
-    public Checkpoints() {
-        // Required empty public constructor
-    }
+    public Checkpoints() { /* Required empty public constructor */ }
 
-    public static Checkpoints newInstance(String param1, String param2) {
+    public static Checkpoints newInstance() {
         Checkpoints fragment = new Checkpoints();
         Bundle args = new Bundle();
         fragment.setArguments(args);
