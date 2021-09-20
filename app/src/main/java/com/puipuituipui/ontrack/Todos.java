@@ -4,7 +4,6 @@ import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -39,7 +38,7 @@ public class Todos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_todos, container, false);
 
         todoList = view.findViewById(R.id.todo_list);
-        TodoListAdapter adapter = new TodoListAdapter(view.getContext(), todos);
+        TodosListAdapter adapter = new TodosListAdapter(view.getContext(), todos);
         todoList.setAdapter(adapter);
 
         return view;

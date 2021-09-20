@@ -4,31 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/page_padding"
     tools:context=".Habits">
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Habits"
-        android:textSize="30dp" />
 
     <ListView
         android:id="@+id/habits_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbarStyle="outsideInset"
+        android:padding="@dimen/page_padding"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/habits_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
         android:backgroundTint="@color/white"
         app:fabCustomSize="60dp"
         android:elevation="5dp"
-        android:src="@drawable/ic_baseline_add_30"
+        android:src="@drawable/ic_baseline_add_40"
         android:tint="@color/habits"
         android:contentDescription="Add"
-        android:layout_margin="5dp" />
+        android:layout_margin="@dimen/page_padding" />
 
 </FrameLayout>

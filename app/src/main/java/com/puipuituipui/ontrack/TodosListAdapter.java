@@ -1,9 +1,7 @@
 package com.puipuituipui.ontrack;
 
-import android.app.Activity;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
-import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,11 +11,11 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
-public class TodoListAdapter extends BaseAdapter {
+public class TodosListAdapter extends BaseAdapter {
     private final Context context;
     private final Todo[] todos;
 
-    public TodoListAdapter(Context context, Todo[] todos) {
+    public TodosListAdapter(Context context, Todo[] todos) {
         this.context = context;
         this.todos = todos;
     }
@@ -45,14 +43,17 @@ public class TodoListAdapter extends BaseAdapter {
         }
 
         Todo todo = getItem(position);
+
+        TextView name = (TextView) convertView.findViewById(R.id.todo_list_name);
+        name.setText(todo.name);
+
+        ImageView state = (ImageView) convertView.findViewById(R.id.todo_list_icon);
         Drawable icon = ContextCompat.getDrawable(
                 convertView.getContext(),
                 todo.state ? R.drawable.ic_baseline_check_box_24: R.drawable.ic_baseline_check_box_outline_blank_24
-                );
-        ((TextView) convertView.findViewById(R.id.todo_list_name))
-                .setText(todo.name);
-        ((ImageView) convertView.findViewById(R.id.todo_list_icon))
-                .setImageDrawable(icon);
+        );
+        state.setImageDrawable(icon);
+
         return convertView;
     }
 

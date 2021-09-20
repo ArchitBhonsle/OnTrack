@@ -5,6 +5,7 @@
       <map>
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_30.xml" value="0.11203703703703703" />
+        <entry key="app/src/main/res/drawable/ic_baseline_add_40.xml" value="0.10648148148148148" />
         <entry key="app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/drawable/top_shadow_gradient.xml" value="0.11481481481481481" />
@@ -15,6 +16,7 @@
         <entry key="app/src/main/res/layout/fragment_reminders.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/fragment_todos.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/habits_item.xml" value="0.3229166666666667" />
+        <entry key="app/src/main/res/layout/habits_list_item.xml" value="0.32065217391304346" />
         <entry key="app/src/main/res/layout/todo_list_item.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/top_shadow_gradient.xml" value="0.3229166666666667" />
       </map>
