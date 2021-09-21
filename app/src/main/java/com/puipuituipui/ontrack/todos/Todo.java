@@ -1,4 +1,4 @@
-package com.puipuituipui.ontrack;
+package com.puipuituipui.ontrack.todos;
 
 public class Todo {
     public final boolean state;

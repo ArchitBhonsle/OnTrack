@@ -1,4 +1,4 @@
-package com.puipuituipui.ontrack;
+package com.puipuituipui.ontrack.todos;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
@@ -11,23 +11,28 @@ import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
 
+import com.puipuituipui.ontrack.R;
+import com.puipuituipui.ontrack.todos.Todo;
+
+import java.util.ArrayList;
+
 public class TodosListAdapter extends BaseAdapter {
     private final Context context;
-    private final Todo[] todos;
+    private final ArrayList<Todo> todos;
 
-    public TodosListAdapter(Context context, Todo[] todos) {
+    public TodosListAdapter(Context context, ArrayList<Todo> todos) {
         this.context = context;
         this.todos = todos;
     }
 
     @Override
     public int getCount() {
-        return todos.length;
+        return todos.size();
     }
 
     @Override
     public Todo getItem(int i) {
-        return todos[i];
+        return todos.get(i);
     }
 
     @Override

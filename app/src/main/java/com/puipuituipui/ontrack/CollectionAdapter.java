@@ -4,6 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
+import com.puipuituipui.ontrack.checkpoints.Checkpoints;
+import com.puipuituipui.ontrack.habits.Habits;
+import com.puipuituipui.ontrack.reminders.Reminders;
+import com.puipuituipui.ontrack.todos.Todos;
+
 public class CollectionAdapter extends FragmentStateAdapter {
     public CollectionAdapter(MainActivity fragment) {
         super(fragment);

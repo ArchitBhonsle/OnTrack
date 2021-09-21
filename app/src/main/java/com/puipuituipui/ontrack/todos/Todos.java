@@ -1,4 +1,4 @@
-package com.puipuituipui.ontrack;
+package com.puipuituipui.ontrack.todos;
 
 import android.os.Bundle;
 
@@ -8,6 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+
+import com.puipuituipui.ontrack.R;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class Todos extends Fragment {
     ListView todoList;
@@ -38,7 +43,8 @@ public class Todos extends Fragment {
         View view = inflater.inflate(R.layout.fragment_todos, container, false);
 
         todoList = view.findViewById(R.id.todo_list);
-        TodosListAdapter adapter = new TodosListAdapter(view.getContext(), todos);
+        TodosListAdapter adapter = new TodosListAdapter(
+                view.getContext(), new ArrayList<>(Arrays.asList(todos)));
         todoList.setAdapter(adapter);
 
         return view;

@@ -1,4 +1,4 @@
-package com.puipuituipui.ontrack;
+package com.puipuituipui.ontrack.habits;
 
 public class Habit {
     public int streak;
