@@ -11,7 +11,6 @@
         android:layout_alignParentStart="true"
         android:textColor="@color/gray"
         android:textSize="20sp"
-        android:paddingStart="15dp"
         android:fontFamily="@font/nunito_regular" />
     <LinearLayout
         android:layout_width="wrap_content"

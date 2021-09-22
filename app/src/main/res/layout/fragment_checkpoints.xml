@@ -24,6 +24,6 @@
         android:src="@drawable/ic_baseline_add_30"
         android:tint="@color/checkpoints"
         android:contentDescription="Add"
-        android:layout_margin="5dp" />
+        android:layout_margin="@dimen/fab_margin" />
 
 </FrameLayout>
