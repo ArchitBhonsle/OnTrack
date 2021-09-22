@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/page_padding"
     tools:context=".reminders.Reminders">
 
-    <TextView
+    <ListView
+        android:id="@+id/reminders_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Reminders"
-        android:textSize="30dp" />
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbarStyle="outsideInset"
+        android:padding="@dimen/page_padding"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
