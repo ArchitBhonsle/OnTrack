@@ -4,14 +4,17 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:padding="@dimen/page_padding"
     tools:context=".checkpoints.Checkpoints">
 
-    <TextView
+    <ListView
+        android:id="@+id/checkpoints_list"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="Checkpoints"
-        android:textSize="30dp" />
+        android:layout_height="wrap_content"
+        android:divider="@null"
+        android:dividerHeight="0dp"
+        android:scrollbarStyle="outsideInset"
+        android:padding="@dimen/page_padding"
+        />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/fab"
@@ -25,5 +28,4 @@
         android:tint="@color/checkpoints"
         android:contentDescription="Add"
         android:layout_margin="5dp" />
-
 </FrameLayout>

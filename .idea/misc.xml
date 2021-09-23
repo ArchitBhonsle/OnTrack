@@ -5,7 +5,8 @@
       <map>
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.33" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_checkpoints.xml" value="0.36666666666666664" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/checkpoint_list_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_checkpoints.xml" value="0.21005917159763313" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_habits.xml" value="0.36666666666666664" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_reminders.xml" value="0.36666666666666664" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_todos.xml" value="0.36666666666666664" />
