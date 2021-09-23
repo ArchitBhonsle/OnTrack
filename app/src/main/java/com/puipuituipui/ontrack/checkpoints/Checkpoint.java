@@ -1,10 +1,13 @@
 package com.puipuituipui.ontrack.checkpoints;
 
+import java.util.Date;
+import java.text.SimpleDateFormat;
+
 public class Checkpoint {
     public String name;
-    public int date;
+    public String  date;
 
-    public  Checkpoint(String name, int date) {
+    public  Checkpoint(String name, String  date) {
         this.name = name;
         this.date = date;
     }
