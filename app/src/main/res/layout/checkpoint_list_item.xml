@@ -5,34 +5,40 @@
     android:orientation="horizontal"
     android:paddingVertical="15dp">
 
-        <TextView
-            android:id="@+id/checkpoint_list_name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:textColor="@color/gray"
-            android:textSize="20sp"
-            android:paddingStart="15dp"
-            android:fontFamily="@font/nunito_regular" />
     <LinearLayout
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true">
+        android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/chekpoint_list_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_outlined_flag_24" />
 
         <TextView
-            android:id="@+id/checkpoint_list_date"
+            android:id="@+id/checkpoint_list_name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/nunito_regular"
+            android:paddingStart="15dp"
+            android:text="water plants"
             android:textColor="@color/gray"
-            android:textSize="20sp"
-            android:paddingStart="5dp"
-            android:fontFamily="@font/nunito_regular" />
+            android:textSize="20sp" />
+
     </LinearLayout>
+
+
+
+    <TextView
+        android:id="@+id/checkpoint_list_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:fontFamily="@font/nunito_regular"
+        android:paddingEnd="5dp"
+        android:text="2/02"
+        android:textColor="@color/gray"
+        android:textSize="20sp" />
 
 
 </RelativeLayout>

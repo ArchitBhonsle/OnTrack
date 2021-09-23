@@ -5,14 +5,14 @@
       <map>
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.33" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
-        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/checkpoint_list_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/checkpoint_list_item.xml" value="0.33" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_checkpoints.xml" value="0.21005917159763313" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_habits.xml" value="0.36666666666666664" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_reminders.xml" value="0.36666666666666664" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/fragment_todos.xml" value="0.36666666666666664" />
         <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/habits_list_item.xml" value="0.5" />
-        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/reminder_list_item.xml" value="0.36666666666666664" />
-        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/todo_list_item.xml" value="0.17831813576494426" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/reminder_list_item.xml" value="0.10526315789473684" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/todo_list_item.xml" value="0.25" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/drawable/ic_baseline_check_circle_outline_24.xml" value="0.1" />
         <entry key="app/src/main/res/drawable/ic_baseline_settings_24.xml" value="0.34322916666666664" />
