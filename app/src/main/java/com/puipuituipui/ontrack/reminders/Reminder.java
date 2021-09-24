@@ -2,9 +2,9 @@ package com.puipuituipui.ontrack.reminders;
 
 public class Reminder {
     public String name;
-    public int time;
+    public String time;
 
-    public Reminder(String name, int time) {
+    public Reminder(String name, String time) {
         this.name = name;
         this.time = time;
     }

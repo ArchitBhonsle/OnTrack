@@ -1,5 +1,6 @@
 package com.puipuituipui.ontrack.reminders;
 
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -9,19 +10,41 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
 
+import java.sql.Time;
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
-
+import java.util.Date;
+import java.text.SimpleDateFormat;
 import com.puipuituipui.ontrack.R;
+
 
 public class Reminders extends Fragment {
     ListView remindersList;
+    SimpleDateFormat timeFormat;
+    Date time1, time2;
+
+    {
+        timeFormat = new SimpleDateFormat("HH:mm");
+        try {
+            time1 = timeFormat.parse("11:30:12");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
+    {
+        try {
+            time2 = timeFormat.parse("1:30:54");
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+    }
     Reminder[] reminders = {
-            new Reminder("Water plants", 15),
-            new Reminder("Charge power Bank", 0),
-            new Reminder("Send in the mail", 5),
-            new Reminder("Check marks", 30),
-            new Reminder("Wash dishes", 23),
+            new Reminder("Water plants", timeFormat.format(time1)),
+            new Reminder("Charge power Bank", timeFormat.format(time1)),
+            new Reminder("Send in the mail", timeFormat.format(time2)),
+            new Reminder("Check marks", timeFormat.format(time2)),
+            new Reminder("Wash dishes", timeFormat.format(time2)),
     };
 
     public Reminders() { /* Required empty public constructor */ }
