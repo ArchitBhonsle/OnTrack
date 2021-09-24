@@ -27,6 +27,6 @@
         android:src="@drawable/ic_baseline_add_40"
         android:tint="@color/habits"
         android:contentDescription="Add"
-        android:layout_margin="@dimen/page_padding" />
+        android:layout_margin="@dimen/fab_margin" />
 
 </FrameLayout>

@@ -13,8 +13,7 @@
         android:divider="@null"
         android:dividerHeight="0dp"
         android:scrollbarStyle="outsideInset"
-        android:padding="@dimen/page_padding"
-        />
+        android:padding="@dimen/page_padding" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/todos_fab"
@@ -27,6 +26,6 @@
         android:src="@drawable/ic_baseline_add_40"
         android:tint="@color/todos"
         android:contentDescription="Add"
-        android:layout_margin="@dimen/page_padding" />
+        android:layout_margin="@dimen/fab_margin" />
 
 </FrameLayout>
