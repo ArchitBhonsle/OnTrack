@@ -11,12 +11,13 @@ import com.puipuituipui.ontrack.R;
 import com.puipuituipui.ontrack.habits.Habit;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class HabitsListAdapter extends BaseAdapter {
     private final Context context;
-    private final ArrayList<Habit> habits;
+    private List<Habit> habits;
 
-    public HabitsListAdapter(Context context, ArrayList<Habit> habits) {
+    public HabitsListAdapter(Context context, List<Habit> habits) {
         this.context = context;
         this.habits = habits;
     }
@@ -54,4 +55,7 @@ public class HabitsListAdapter extends BaseAdapter {
         return convertView;
     }
 
+    public void setData(List<Habit> habits) {
+        this.habits = habits;
+    }
 }
