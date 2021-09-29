@@ -26,6 +26,7 @@
         android:elevation="5dp"
         android:src="@drawable/ic_baseline_add_30"
         android:tint="@color/reminders"
+        app:borderWidth="0dp"
         android:contentDescription="Add"
         android:layout_margin="@dimen/fab_margin" />
 
