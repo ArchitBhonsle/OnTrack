@@ -34,6 +34,8 @@ public class Todos extends Fragment {
     FloatingActionButton fab;
     Calendar dueDate;
 
+    List<Todo> todos;
+
     public Todos() { /* Required empty public constructor */ }
 
     public static Todos newInstance() {
@@ -71,7 +73,7 @@ public class Todos extends Fragment {
     List<Todo> refreshTodos() {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
-                .allowMainThreadQueries()    // TODO Fix this later
+                .allowMainThreadQueries()
                 .build();
         return db.todoDao().getAll();
     }
@@ -79,7 +81,7 @@ public class Todos extends Fragment {
     private void fabClick(Context ctx) {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
-                .allowMainThreadQueries()    // TODO Fix this later
+                .allowMainThreadQueries()
                 .build();
 
         BottomSheetDialog dialog = new BottomSheetDialog(ctx);
@@ -91,13 +93,24 @@ public class Todos extends Fragment {
         EditText desc = dialog.findViewById(R.id.desc_todo);
         TextView due = dialog.findViewById(R.id.due_todo);
 
+        dueDate = Calendar.getInstance();
+        dueDate.set(Calendar.HOUR_OF_DAY, 23);
+        dueDate.set(Calendar.MINUTE, 59);
+        due.setText(formatCalendar(dueDate));
+        due.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDueDate(ctx, due);
+            }
+        });
+
         add.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Todo current = new Todo(
                         name.getText().toString(),
                         desc.getText().toString(),
-                        new Date());
+                        dueDate);
                 db.todoDao().insertAll(current);
 
                 List<Todo> newTodos = refreshTodos();
@@ -114,22 +127,11 @@ public class Todos extends Fragment {
             }
         });
 
-        dueDate = Calendar.getInstance();
-        dueDate.add(Calendar.DAY_OF_MONTH, 1);
-        dueDate.set(Calendar.SECOND, 0);
-        due.setText(formatCalendar(dueDate));
-
-        due.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setDueDate(ctx, due);
-            }
-        });
 
         dialog.show();
     }
 
-    public void setDueDate(Context context, TextView dueTextView) {
+    private void setDueDate(Context context, TextView dueTextView) {
         new DatePickerDialog(context, R.style.TodoDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -141,13 +143,13 @@ public class Todos extends Fragment {
                         dueDate.set(Calendar.MINUTE, minute);
                         dueTextView.setText(formatCalendar(dueDate));
                     }
-                }, dueDate.get(Calendar.HOUR_OF_DAY), dueDate.get(Calendar.MINUTE), false).show();
+                }, 23, 59, false).show();
             }
         }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
     }
 
     private String formatCalendar(Calendar date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("h:m aa MMM d, y");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm:yyyy");
         return formatter.format(date.getTime());
     }
 }

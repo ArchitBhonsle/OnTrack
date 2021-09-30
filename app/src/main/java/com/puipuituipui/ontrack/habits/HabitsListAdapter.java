@@ -8,9 +8,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.puipuituipui.ontrack.R;
-import com.puipuituipui.ontrack.habits.Habit;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class HabitsListAdapter extends BaseAdapter {
@@ -41,7 +39,7 @@ public class HabitsListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup container) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.habits_list_item, container, false);
+                    .inflate(R.layout.list_item_habits, container, false);
         }
 
         Habit habit = getItem(position);

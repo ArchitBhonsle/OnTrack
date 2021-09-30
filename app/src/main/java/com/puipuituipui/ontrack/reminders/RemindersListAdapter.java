@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.puipuituipui.ontrack.R;
-import com.puipuituipui.ontrack.reminders.Reminder;
 
 import java.util.ArrayList;
 
@@ -38,7 +37,7 @@ public class RemindersListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup container) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.reminder_list_item, container, false);
+                    .inflate(R.layout.list_item_reminders, container, false);
         }
 
         Reminder reminder = getItem(position);

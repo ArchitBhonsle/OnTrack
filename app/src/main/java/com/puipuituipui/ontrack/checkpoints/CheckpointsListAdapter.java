@@ -7,7 +7,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 import com.puipuituipui.ontrack.R;
-import com.puipuituipui.ontrack.checkpoints.Checkpoint;
 
 import java.util.ArrayList;
 
@@ -39,7 +38,7 @@ public class CheckpointsListAdapter extends BaseAdapter{
     public View getView(int position, View convertView, ViewGroup container) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.checkpoint_list_item, container, false);
+                    .inflate(R.layout.list_item_checkpoints, container, false);
         }
 
         Checkpoint checkpoint = getItem(position);

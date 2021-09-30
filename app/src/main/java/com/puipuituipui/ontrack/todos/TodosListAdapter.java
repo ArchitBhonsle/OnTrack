@@ -15,6 +15,7 @@ import androidx.room.Room;
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
 
+import java.util.Calendar;
 import java.util.List;
 
 public class TodosListAdapter extends BaseAdapter {
@@ -45,7 +46,7 @@ public class TodosListAdapter extends BaseAdapter {
     public View getView(int position, View convertView, ViewGroup container) {
         if (convertView == null) {
             convertView = LayoutInflater.from(context)
-                    .inflate(R.layout.todo_list_item, container, false);
+                    .inflate(R.layout.list_item_todos, container, false);
         }
 
         Todo todo = getItem(position);
@@ -62,11 +63,17 @@ public class TodosListAdapter extends BaseAdapter {
         state.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                todo.state = !todo.state;
+                if (todo.state) {
+                    todo.state = false;
+                    todo.marked = null;
+                } else {
+                    todo.state = true;
+                    todo.marked = Calendar.getInstance();
+                }
 
                 AppDatabase db = Room.databaseBuilder(
                         context.getApplicationContext(), AppDatabase.class, "db")
-                        .allowMainThreadQueries()    // TODO Fix this later
+                        .allowMainThreadQueries()
                         .build();
                 db.todoDao().updateTodos(todo);
                 notifyDataSetChanged();
