@@ -57,5 +57,6 @@ public class HabitsListAdapter extends BaseAdapter {
 
     public void setData(List<Habit> habits) {
         this.habits = habits;
+        this.notifyDataSetChanged();
     }
 }

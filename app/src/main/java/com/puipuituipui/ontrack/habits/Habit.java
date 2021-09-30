@@ -1,8 +1,6 @@
 package com.puipuituipui.ontrack.habits;
 
-import androidx.room.Dao;
 import androidx.room.Entity;
-import androidx.room.Ignore;
 import androidx.room.PrimaryKey;
 
 @Entity

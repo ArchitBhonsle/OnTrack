@@ -27,8 +27,6 @@ public class Habits extends Fragment {
     HabitsListAdapter adapter;
     FloatingActionButton fab;
 
-    List<Habit> habits;
-
     public Habits() { /* Required empty public constructor */ }
 
     public static Habits newInstance() {
@@ -52,7 +50,7 @@ public class Habits extends Fragment {
         habitsList = view.findViewById(R.id.habits_list);
         adapter = new HabitsListAdapter(
                 view.getContext(),
-                refreshHabits(getActivity().getApplicationContext())
+                refreshHabits()
         );
         habitsList.setAdapter(adapter);
 
@@ -67,12 +65,12 @@ public class Habits extends Fragment {
         return view;
     }
 
-    List<Habit> refreshHabits(Context appCtx) {
+    List<Habit> refreshHabits() {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
                 .allowMainThreadQueries()    // TODO Fix this later
                 .build();
-        return db.userDao().getAll();
+        return db.habitDao().getAll();
     }
 
     private void fabClick(Context ctx) {
@@ -93,11 +91,10 @@ public class Habits extends Fragment {
             @Override
             public void onClick(View view) {
                 Habit current = new Habit(name.getText().toString(), desc.getText().toString());
-                db.userDao().insertAll(current);
+                db.habitDao().insertAll(current);
 
-                List<Habit> newHabits = refreshHabits(getActivity().getApplicationContext());
+                List<Habit> newHabits = refreshHabits();
                 adapter.setData(newHabits);
-                adapter.notifyDataSetChanged();
 
                 dialog.cancel();
             }

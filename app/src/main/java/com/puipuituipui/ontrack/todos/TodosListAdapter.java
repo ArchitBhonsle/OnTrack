@@ -10,17 +10,18 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
+import androidx.room.Room;
 
+import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
-import com.puipuituipui.ontrack.todos.Todo;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class TodosListAdapter extends BaseAdapter {
     private final Context context;
-    private final ArrayList<Todo> todos;
+    private List<Todo> todos;
 
-    public TodosListAdapter(Context context, ArrayList<Todo> todos) {
+    public TodosListAdapter(Context context, List<Todo> todos) {
         this.context = context;
         this.todos = todos;
     }
@@ -37,7 +38,7 @@ public class TodosListAdapter extends BaseAdapter {
 
     @Override
     public long getItemId(int i) {
-        return 0;
+        return todos.get(i).id;
     }
 
     @Override
@@ -58,8 +59,25 @@ public class TodosListAdapter extends BaseAdapter {
                 todo.state ? R.drawable.ic_baseline_check_box_24: R.drawable.ic_baseline_check_box_outline_blank_24
         );
         state.setImageDrawable(icon);
+        state.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                todo.state = !todo.state;
+
+                AppDatabase db = Room.databaseBuilder(
+                        context.getApplicationContext(), AppDatabase.class, "db")
+                        .allowMainThreadQueries()    // TODO Fix this later
+                        .build();
+                db.todoDao().updateTodos(todo);
+                notifyDataSetChanged();
+            }
+        });
 
         return convertView;
     }
 
+    public void setData(List<Todo> todos) {
+        this.todos = todos;
+        this.notifyDataSetChanged();
+    }
 }

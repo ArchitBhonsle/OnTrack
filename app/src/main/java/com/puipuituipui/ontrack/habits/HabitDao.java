@@ -23,5 +23,5 @@ public interface HabitDao {
     int updateUsers(Habit... habits);
 
     @Delete
-    void delete(Habit user);
+    void delete(Habit habit);
 }

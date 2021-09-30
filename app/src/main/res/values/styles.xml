@@ -10,4 +10,7 @@
         <item name="colorControlActivated">@color/habits</item>
         <item name="colorControlHighlight">@color/gray</item>
     </style>
+    <style name="TodoDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/todos</item>
+    </style>
 </resources>
