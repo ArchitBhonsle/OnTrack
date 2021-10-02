@@ -2,11 +2,13 @@ package com.puipuituipui.ontrack.todos;
 
 import android.content.Context;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -60,9 +62,11 @@ public class TodosListAdapter extends BaseAdapter {
                 todo.state ? R.drawable.ic_baseline_check_box_24: R.drawable.ic_baseline_check_box_outline_blank_24
         );
         state.setImageDrawable(icon);
-        state.setOnClickListener(new View.OnClickListener() {
+
+        LinearLayout markArea = convertView.findViewById(R.id.todo_list_mark);
+        markArea.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
-            public void onClick(View view) {
+            public boolean onLongClick(View view) {
                 if (todo.state) {
                     todo.state = false;
                     todo.marked = null;
@@ -77,6 +81,15 @@ public class TodosListAdapter extends BaseAdapter {
                         .build();
                 db.todoDao().updateTodos(todo);
                 notifyDataSetChanged();
+
+                return true;
+            }
+        });
+        markArea.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.i("Todo", "clicked");
+                // Open edit dialog here
             }
         });
 

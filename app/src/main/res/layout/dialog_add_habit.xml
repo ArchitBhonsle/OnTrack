@@ -1,63 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-    >
-<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:paddingVertical="30dp"
-    android:paddingHorizontal="@dimen/page_padding">
-    <TextView
-        android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="5dp"
-        android:fontFamily="@font/nunito_bold"
-        android:textColor="@color/habits"
-        android:textSize="30sp"
-        android:text="Add Habit" />
-    <EditText
-        android:id="@+id/name_habit"
-        android:theme="@style/HabitEditText"
-        android:layout_width="match_parent"
-        android:layout_height="60dp"
-        android:hint="Name"
-        android:layout_marginBottom="5dp" />
-    <EditText
-        android:id="@+id/desc_habit"
-        android:theme="@style/HabitEditText"
-        android:layout_width="match_parent"
-        android:layout_height="100dp"
-        android:hint="Description"
-        android:inputType="text|textMultiLine"
-        android:gravity="top"
-        android:layout_marginBottom="5dp" />
-</LinearLayout>
+        android:orientation="vertical"
+        android:paddingVertical="40dp"
+        android:paddingHorizontal="@dimen/page_padding">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_padding"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/habits"
+            android:textSize="30sp"
+            android:text="Add Habit" />
+        <EditText
+            android:id="@+id/name_habit"
+            android:theme="@style/TodoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="text|textCapWords"
+            android:hint="Name"
+            android:layout_marginBottom="@dimen/dialog_padding" />
+        <EditText
+            android:id="@+id/desc_habit"
+            android:theme="@style/TodoEditText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Description"
+            android:inputType="text|textMultiLine|textCapSentences"
+            android:gravity="top"
+            android:layout_marginBottom="@dimen/dialog_padding"
+            android:padding="10dp"
+            android:background="@drawable/border" />
+    </LinearLayout>
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="75dp">
-    <Button
-        android:id="@+id/cancel_habit"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fontFamily="@font/nunito_regular"
-        android:textColor="@color/gray"
-        android:backgroundTint="@color/white"
-        android:text="cancel"/>
-    <Button
-        android:id="@+id/add_habit"
-        android:layout_width="0dp"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:fontFamily="@font/nunito_regular"
-        android:textColor="@color/white"
-        android:backgroundTint="@color/habits"
-        android:text="add"/>
-</LinearLayout>
-
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+        <Button
+            android:id="@+id/cancel_habit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/nunito_regular"
+            android:textColor="@color/gray"
+            android:backgroundTint="@color/white"
+            android:text="cancel"/>
+        <Button
+            android:id="@+id/add_habit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:fontFamily="@font/nunito_regular"
+            android:textColor="@color/white"
+            android:backgroundTint="@color/habits"
+            android:text="add"/>
+    </LinearLayout>
 </LinearLayout>

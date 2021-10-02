@@ -20,7 +20,7 @@ public interface HabitDao {
     List<Long> insertAll(Habit... habits);
 
     @Update
-    int updateUsers(Habit... habits);
+    int updateHabits(Habit... habits);
 
     @Delete
     void delete(Habit habit);

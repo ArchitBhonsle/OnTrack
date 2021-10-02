@@ -68,7 +68,7 @@ public class Habits extends Fragment {
     List<Habit> refreshHabits() {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
-                .allowMainThreadQueries()    // TODO Fix this later
+                .allowMainThreadQueries()
                 .build();
         return db.habitDao().getAll();
     }

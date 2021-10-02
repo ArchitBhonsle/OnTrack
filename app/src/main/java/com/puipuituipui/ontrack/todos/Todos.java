@@ -149,7 +149,7 @@ public class Todos extends Fragment {
     }
 
     private String formatCalendar(Calendar date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm:yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss");
         return formatter.format(date.getTime());
     }
 }
