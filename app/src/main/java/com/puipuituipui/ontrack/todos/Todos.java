@@ -22,10 +22,9 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
+import com.puipuituipui.ontrack.Utils;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class Todos extends Fragment {
@@ -93,10 +92,7 @@ public class Todos extends Fragment {
         EditText desc = dialog.findViewById(R.id.desc_todo);
         TextView due = dialog.findViewById(R.id.due_todo);
 
-        dueDate = Calendar.getInstance();
-        dueDate.set(Calendar.HOUR_OF_DAY, 23);
-        dueDate.set(Calendar.MINUTE, 59);
-        due.setText(formatCalendar(dueDate));
+        due.setText("Set due date (optional)");
         due.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -132,6 +128,9 @@ public class Todos extends Fragment {
     }
 
     private void setDueDate(Context context, TextView dueTextView) {
+        dueDate = Calendar.getInstance();
+        dueDate.set(Calendar.HOUR_OF_DAY, 23);
+        dueDate.set(Calendar.MINUTE, 59);
         new DatePickerDialog(context, R.style.TodoDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
@@ -141,15 +140,10 @@ public class Todos extends Fragment {
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         dueDate.set(Calendar.MINUTE, minute);
-                        dueTextView.setText(formatCalendar(dueDate));
+                        dueTextView.setText(Utils.formatCalendarLong(dueDate));
                     }
                 }, 23, 59, false).show();
             }
         }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
-    }
-
-    private String formatCalendar(Calendar date) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss");
-        return formatter.format(date.getTime());
     }
 }

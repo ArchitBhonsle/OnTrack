@@ -8,7 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
-import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
@@ -16,6 +16,7 @@ import androidx.room.Room;
 
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
+import com.puipuituipui.ontrack.Utils;
 
 import java.util.Calendar;
 import java.util.List;
@@ -63,7 +64,10 @@ public class TodosListAdapter extends BaseAdapter {
         );
         state.setImageDrawable(icon);
 
-        LinearLayout markArea = convertView.findViewById(R.id.todo_list_mark);
+        TextView due = (TextView) convertView.findViewById(R.id.todo_list_due);
+        if (todo.due != null) due.setText(Utils.formatCalendarDate(todo.due));
+
+        RelativeLayout markArea = convertView.findViewById(R.id.todo_list_mark);
         markArea.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {

@@ -21,7 +21,7 @@
         <entry key="app/src/main/res/layout/habits_item.xml" value="0.3229166666666667" />
         <entry key="app/src/main/res/layout/habits_list_item.xml" value="0.32065217391304346" />
         <entry key="app/src/main/res/layout/list_item_habits.xml" value="0.16041666666666668" />
-        <entry key="app/src/main/res/layout/list_item_todos.xml" value="0.16041666666666668" />
+        <entry key="app/src/main/res/layout/list_item_todos.xml" value="0.8" />
         <entry key="app/src/main/res/layout/reminder_list_item.xml" value="0.32065217391304346" />
         <entry key="app/src/main/res/layout/todo_list_item.xml" value="0.30416666666666664" />
         <entry key="app/src/main/res/layout/top_shadow_gradient.xml" value="0.3229166666666667" />
