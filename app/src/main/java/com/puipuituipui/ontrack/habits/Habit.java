@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.puipuituipui.ontrack.Utils;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Calendar;
@@ -35,10 +37,12 @@ public class Habit {
         }
 
         Calendar expected = (Calendar) this.lastMarked.clone();
-        expected.add(Calendar.DAY_OF_MONTH, 1);
+        expected.add(Calendar.DATE, 1);
         Calendar today = Calendar.getInstance();
-        this.setLastMarked(today);
 
+        Log.i("Habit:ping", String.valueOf(expected.compareTo(today)));
+        Log.i("Habit:ping", Utils.formatCalendarLong(expected));
+        Log.i("Habit:ping", Utils.formatCalendarLong(today));
         if (expected.compareTo(today) < 0) {
             Log.i("Habit:ping", "reset case");
             Log.i("Habit:ping",this.toString());
@@ -61,18 +65,19 @@ public class Habit {
         }
 
         Calendar expected = (Calendar) this.lastMarked.clone();
-        expected.add(Calendar.DAY_OF_MONTH, 1);
+        expected.add(Calendar.DATE, 1);
         Calendar today = Calendar.getInstance();
         this.setLastMarked(today);
 
-        if (expected.equals(today)) {
+        if (expected.compareTo(today) <= 0) {
             Log.i("Habit:mark", "on time case");
             Log.i("Habit:mark",this.toString());
             this.streak += 1;
             return true;
         } else {
-            Log.i("Habit:mark", "nothing case");
-            Log.i("Habit:mark",this.toString());
+            Log.i("Habit:mark", "reset case");
+            Log.i("Habit:mark", this.toString());
+            this.streak = 1;
             return false;
         }
     }
