@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 
 import androidx.fragment.app.Fragment;
@@ -82,8 +83,8 @@ public class Habits extends Fragment {
         BottomSheetDialog dialog = new BottomSheetDialog(ctx);
         dialog.setContentView(R.layout.dialog_add_habit);
 
-        Button add = dialog.findViewById(R.id.add_habit);
-        Button cancel = dialog.findViewById(R.id.cancel_habit);
+        ImageButton add = dialog.findViewById(R.id.add_habit);
+        ImageButton cancel = dialog.findViewById(R.id.cancel_habit);
         EditText name = dialog.findViewById(R.id.name_habit);
         EditText desc = dialog.findViewById(R.id.desc_habit);
 

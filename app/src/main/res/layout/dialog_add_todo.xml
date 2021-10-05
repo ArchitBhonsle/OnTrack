@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -9,7 +10,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingVertical="40dp"
+        android:paddingTop="40dp"
+        android:paddingBottom="@dimen/dialog_padding"
         android:paddingHorizontal="@dimen/page_padding">
         <TextView
             android:layout_width="wrap_content"
@@ -59,27 +61,28 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="75dp">
-        <Button
+        <ImageButton
             android:id="@+id/cancel_todo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_regular"
-            android:textColor="@color/gray"
-            android:backgroundTint="@color/white"
-            android:text="cancel"/>
-        <Button
+            android:layout_alignParentStart="true"
+            android:padding="30dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="@color/white"
+            android:contentDescription="cancel" />
+        <ImageButton
             android:id="@+id/add_todo"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:fontFamily="@font/nunito_regular"
-            android:textColor="@color/white"
-            android:backgroundTint="@color/todos"
-            android:text="add"/>
-    </LinearLayout>
+            android:layout_alignParentEnd="true"
+            android:padding="30dp"
+            android:src="@drawable/ic_baseline_add_24"
+            android:background="@color/white"
+            android:contentDescription="add"
+            app:tint="@color/todos" />
+    </RelativeLayout>
 
 </LinearLayout>
