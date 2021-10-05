@@ -1,14 +1,37 @@
 package com.puipuituipui.ontrack.checkpoints;
 
-import java.util.Date;
-import java.text.SimpleDateFormat;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
+import java.util.Calendar;
+
+@Entity
 public class Checkpoint {
-    public String name;
-    public String  date;
+    @PrimaryKey(autoGenerate = true)
+    public Long id;
 
-    public  Checkpoint(String name, String  date) {
+    public boolean state;
+    public String name;
+    public String description;
+    public Calendar due;
+    public Calendar marked;
+
+    public Checkpoint(String name, String description, Calendar due) {
+        this.state = false;
         this.name = name;
-        this.date = date;
+        this.description = description;
+        this.due = due;
+    }
+
+    @Override
+    public String toString() {
+        return "Checkpoint{" +
+                "id=" + id +
+                ", state=" + state +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", due=" + due +
+                ", marked=" + marked +
+                '}';
     }
 }

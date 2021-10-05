@@ -1,52 +1,35 @@
 package com.puipuituipui.ontrack.checkpoints;
 
-import android.annotation.SuppressLint;
+import android.app.DatePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.room.Room;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ListView;
+import android.widget.TextView;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
-
+import com.google.android.material.bottomsheet.BottomSheetDialog;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
-import java.util.Date;
-import java.text.SimpleDateFormat;
+
+import java.util.Calendar;
+import java.util.List;
 
 public class Checkpoints extends Fragment {
     ListView checkpointsList;
-    SimpleDateFormat dateFormat;
-    Date date1, date2;
+    CheckpointsListAdapter adapter;
+    FloatingActionButton fab;
+    Calendar dueDate;
 
-    {
-        dateFormat = new SimpleDateFormat("dd/MM");
-        try {
-            date1 = dateFormat.parse("29/09/2021");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    {
-        try {
-            date2 = dateFormat.parse("01/10/2021");
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-    }
-
-    Checkpoint[] checkpoints = {
-            new Checkpoint("Water plants", dateFormat.format(date1)),
-            new Checkpoint("Charge power Bank", dateFormat.format(date1)),
-            new Checkpoint("Send in the mail", dateFormat.format(date1)),
-            new Checkpoint("Check marks", dateFormat.format(date2)),
-            new Checkpoint("Wash dishes", dateFormat.format(date2)),
-    };
+    List<Checkpoint> checkpoints;
 
     public Checkpoints() { /* Required empty public constructor */ }
 
@@ -67,9 +50,84 @@ public class Checkpoints extends Fragment {
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_checkpoints, container, false);
         checkpointsList = view.findViewById(R.id.checkpoints_list);
-        CheckpointsListAdapter adapter = new CheckpointsListAdapter(
-                view.getContext(), new ArrayList<>(Arrays.asList(checkpoints)));
+        adapter = new CheckpointsListAdapter(view.getContext(), refreshCheckpoints());
         checkpointsList.setAdapter(adapter);
+
+        fab = view.findViewById(R.id.checkpoints_fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                fabClick(view.getContext());
+            }
+        });
         return view;
+    }
+
+    List<Checkpoint> refreshCheckpoints() {
+        AppDatabase db = Room.databaseBuilder(
+                getActivity().getApplicationContext(), AppDatabase.class, "db")
+                .allowMainThreadQueries()
+                .build();
+        return db.checkpointDao().getAll();
+    }
+
+    private void fabClick(Context ctx) {
+        AppDatabase db = Room.databaseBuilder(
+                getActivity().getApplicationContext(), AppDatabase.class, "db")
+                .allowMainThreadQueries()
+                .build();
+
+        BottomSheetDialog dialog = new BottomSheetDialog(ctx);
+        dialog.setContentView(R.layout.dialog_add_checkpoint);
+
+        Button add = dialog.findViewById(R.id.add_checkpoint);
+        Button cancel = dialog.findViewById(R.id.cancel_checkpoint);
+        EditText name = dialog.findViewById(R.id.name_checkpoint);
+        EditText desc = dialog.findViewById(R.id.desc_checkpoint);
+        TextView due = dialog.findViewById(R.id.due_checkpoint);
+
+        due.setText("Set due date (optional)");
+        due.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDueDate(ctx);
+            }
+        });
+
+        add.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Checkpoint current = new Checkpoint(
+                        name.getText().toString(),
+                        desc.getText().toString(),
+                        dueDate);
+                db.checkpointDao().insertAll(current);
+
+                List<Checkpoint> newCheckpoints = refreshCheckpoints();
+                adapter.setData(newCheckpoints);
+
+                dialog.cancel();
+            }
+        });
+
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void setDueDate(Context context) {
+        dueDate = Calendar.getInstance();
+        dueDate.set(Calendar.HOUR_OF_DAY, 23);
+
+        new DatePickerDialog(context, R.style.TodoDialogTheme, (view, year, monthOfYear, dayOfMonth) ->
+                dueDate.set(year, monthOfYear, dayOfMonth),
+                dueDate.get(Calendar.YEAR),
+                dueDate.get(Calendar.MONTH),
+                dueDate.get(Calendar.DATE)).show();
     }
 }

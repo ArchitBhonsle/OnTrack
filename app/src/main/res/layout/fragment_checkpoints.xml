@@ -17,7 +17,7 @@
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
-        android:id="@+id/fab"
+        android:id="@+id/checkpoints_fab"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end|bottom"
@@ -28,5 +28,5 @@
         android:tint="@color/checkpoints"
         app:borderWidth="0dp"
         android:contentDescription="Add"
-        android:layout_margin="5dp" />
+        android:layout_margin="15dp" />
 </FrameLayout>

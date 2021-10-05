@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/checkpoint_list_mark"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="horizontal"
@@ -10,7 +11,7 @@
         android:layout_height="wrap_content">
 
         <ImageView
-            android:id="@+id/chekpoint_list_icon"
+            android:id="@+id/checkpoint_list_icon"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:src="@drawable/ic_baseline_outlined_flag_24" />
@@ -21,7 +22,6 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_regular"
             android:paddingStart="15dp"
-            android:text="water plants"
             android:textColor="@color/gray"
             android:textSize="20sp" />
 
@@ -30,7 +30,7 @@
 
 
     <TextView
-        android:id="@+id/checkpoint_list_date"
+        android:id="@+id/checkpoint_list_due"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
