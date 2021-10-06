@@ -1,5 +1,6 @@
 package com.puipuituipui.ontrack.todos;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -7,6 +8,9 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -14,9 +18,11 @@ import android.widget.TextView;
 import androidx.core.content.ContextCompat;
 import androidx.room.Room;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
 import com.puipuituipui.ontrack.Utils;
+import com.puipuituipui.ontrack.habits.Habit;
 
 import java.util.Calendar;
 import java.util.List;
@@ -95,7 +101,7 @@ public class TodosListAdapter extends BaseAdapter {
             @Override
             public void onClick(View view) {
                 Log.i("Todo", "clicked");
-                // Open edit dialog here
+                openEditDialog(context, todo);
             }
         });
 
@@ -105,5 +111,88 @@ public class TodosListAdapter extends BaseAdapter {
     public void setData(List<Todo> todos) {
         this.todos = todos;
         this.notifyDataSetChanged();
+    }
+
+    private void openEditDialog(Context ctx, Todo todo) {
+        AppDatabase db = Room.databaseBuilder(
+                ctx.getApplicationContext(), AppDatabase.class, "db")
+                .allowMainThreadQueries()
+                .build();
+
+        BottomSheetDialog dialog = new BottomSheetDialog(ctx);
+        dialog.setContentView(R.layout.dialog_edit_todo);
+
+        Calendar dueDate = todo.due;
+
+        ImageButton delete = dialog.findViewById(R.id.delete_todo);
+        ImageButton mark = dialog.findViewById(R.id.mark_todo);
+        ImageButton change = dialog.findViewById(R.id.change_todo);
+        EditText name = dialog.findViewById(R.id.name_todo);
+        EditText desc = dialog.findViewById(R.id.desc_todo);
+        TextView due = dialog.findViewById(R.id.due_todo);
+
+        name.setText(todo.name);
+        desc.setText(todo.description);
+        due.setText(Utils.formatCalendarDate(dueDate));
+
+
+        due.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                setDueDate(ctx, due, dueDate);
+            }
+        });
+
+        mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                todo.state = !todo.state;
+                db.todoDao().updateTodos(todo);
+
+                List<Todo> todos = db.todoDao().getAll();
+                setData(todos);
+
+                dialog.cancel();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.todoDao().updateTodos(todo);
+
+                List<Todo> todos = db.todoDao().getAll();
+                setData(todos);
+
+                dialog.cancel();
+            }
+        });
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                todo.name = name.getText().toString();
+                todo.description = desc.getText().toString();
+
+                db.todoDao().updateTodos(todo);
+
+                List<Todo> todos = db.todoDao().getAll();
+                setData(todos);
+
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
+    }
+
+    private void setDueDate(Context context, TextView dueTextView, Calendar dueDate) {
+        new DatePickerDialog(context, R.style.TodoDialogTheme, new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
+                dueDate.set(year, monthOfYear, dayOfMonth);
+                dueTextView.setText(Utils.formatCalendarDate(dueDate));
+            }
+        }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
     }
 }
