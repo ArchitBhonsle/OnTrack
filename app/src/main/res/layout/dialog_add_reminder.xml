@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="40dp"
+        android:paddingBottom="@dimen/dialog_padding"
+        android:paddingHorizontal="@dimen/page_padding">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="@dimen/dialog_padding"
+            android:fontFamily="@font/nunito_bold"
+            android:textColor="@color/reminders"
+            android:textSize="30sp"
+            android:text="Add Reminder" />
+        <EditText
+            android:id="@+id/name_reminder"
+            android:theme="@style/ReminderEditText"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:inputType="text|textCapWords"
+            android:hint="Name"
+            android:layout_marginBottom="@dimen/dialog_padding" />
+        <EditText
+            android:id="@+id/desc_reminder"
+            android:theme="@style/ReminderEditText"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:hint="Description"
+            android:inputType="text|textMultiLine|textCapSentences"
+            android:gravity="top"
+            android:layout_marginBottom="@dimen/dialog_padding"
+            android:padding="10dp"
+            android:background="@drawable/border" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:textSize="18sp"
+                android:text="Due by:" />
+            <TextView
+                android:id="@+id/time_reminder"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingBottom="10dp"
+                android:textColor="@color/gray"
+                android:background="@drawable/underline" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="75dp">
+        <ImageButton
+            android:id="@+id/cancel_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentStart="true"
+            android:padding="30dp"
+            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:background="@color/white"
+            android:contentDescription="cancel" />
+        <ImageButton
+            android:id="@+id/add_reminder"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentEnd="true"
+            android:padding="30dp"
+            android:src="@drawable/ic_baseline_add_24"
+            android:background="@color/white"
+            android:contentDescription="add"
+            app:tint="@color/reminders" />
+    </RelativeLayout>
+
+</LinearLayout>

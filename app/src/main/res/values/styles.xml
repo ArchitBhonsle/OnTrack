@@ -18,4 +18,9 @@
         <item name="colorControlActivated">@color/checkpoints</item>
         <item name="colorControlHighlight">@color/gray</item>
     </style>
+    <style name="ReminderEditText" parent="Theme.AppCompat.Light.DarkActionBar">
+        <item name="colorControlNormal">@color/gray</item>
+        <item name="colorControlActivated">@color/reminders</item>
+        <item name="colorControlHighlight">@color/gray</item>
+    </style>
 </resources>
