@@ -59,12 +59,12 @@ public class RemindersListAdapter extends BaseAdapter {
         ImageView state = (ImageView) convertView.findViewById(R.id.reminder_list_icon);
         Drawable icon = ContextCompat.getDrawable(
                 convertView.getContext(),
-                reminder.state ? R.drawable.ic_baseline_access_alarm_24: R.drawable.ic_baseline_check_box_outline_blank_24
+                reminder.state ? R.drawable.ic_baseline_access_alarm_24: R.drawable.ic_baseline_alarm_on_24
         );
 
         TextView due = (TextView) convertView.findViewById(R.id.reminder_list_time);
         if (reminder.time != null) {
-            due.setText(Utils.formatCalendarDate(reminder.time));
+            due.setText(Utils.formatCalenderTime(reminder.time));
         }
 
         RelativeLayout markArea = convertView.findViewById((R.id.reminder_list_mark));

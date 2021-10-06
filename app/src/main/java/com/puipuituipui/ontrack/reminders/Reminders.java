@@ -133,16 +133,16 @@ public class Reminders extends Fragment {
         dueDate.set(Calendar.HOUR_OF_DAY, 23);
         dueDate.set(Calendar.MINUTE, 59);
 
-        new DatePickerDialog(context, R.style.TodoDialogTheme, new DatePickerDialog.OnDateSetListener() {
+        new DatePickerDialog(context, R.style.ReminderDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 dueDate.set(year, monthOfYear, dayOfMonth);
-                new TimePickerDialog(context, R.style.TodoDialogTheme, new TimePickerDialog.OnTimeSetListener() {
+                new TimePickerDialog(context, R.style.ReminderDialogTheme, new TimePickerDialog.OnTimeSetListener() {
                     @Override
                     public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
                         dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
                         dueDate.set(Calendar.MINUTE, minute);
-                        timeTextView.setText(Utils.formatCalendarDateShort(dueDate));
+                        timeTextView.setText(Utils.formatCalendarLong(dueDate));
                     }
                 }, 23, 59, false).show();
             }

@@ -18,4 +18,9 @@ public class Utils {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss");
         return formatter.format(cal.getTime());
     }
+
+    public static String formatCalenderTime(Calendar cal) {
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+        return  formatter.format(cal.getTime());
+    }
 }
