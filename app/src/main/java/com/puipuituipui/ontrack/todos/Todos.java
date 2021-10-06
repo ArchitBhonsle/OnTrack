@@ -1,7 +1,6 @@
 package com.puipuituipui.ontrack.todos;
 
 import android.app.DatePickerDialog;
-import android.app.TimePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
@@ -11,13 +10,11 @@ import androidx.room.Room;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.TimePicker;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -63,7 +60,7 @@ public class Todos extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fabClick(view.getContext());
+                openAddDialog(view.getContext());
             }
         });
 
@@ -78,7 +75,7 @@ public class Todos extends Fragment {
         return db.todoDao().getAll();
     }
 
-    private void fabClick(Context ctx) {
+    private void openAddDialog(Context ctx) {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
                 .allowMainThreadQueries()
@@ -93,7 +90,10 @@ public class Todos extends Fragment {
         EditText desc = dialog.findViewById(R.id.desc_todo);
         TextView due = dialog.findViewById(R.id.due_todo);
 
-        due.setText("Set due date (optional)");
+        dueDate = Calendar.getInstance();
+        dueDate.set(Calendar.HOUR_OF_DAY, 23);
+        dueDate.set(Calendar.MINUTE, 59);
+        due.setText(Utils.formatCalendarDate(dueDate));
         due.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -129,21 +129,11 @@ public class Todos extends Fragment {
     }
 
     private void setDueDate(Context context, TextView dueTextView) {
-        dueDate = Calendar.getInstance();
-        dueDate.set(Calendar.HOUR_OF_DAY, 23);
-        dueDate.set(Calendar.MINUTE, 59);
         new DatePickerDialog(context, R.style.TodoDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
                 dueDate.set(year, monthOfYear, dayOfMonth);
-                new TimePickerDialog(context, R.style.TodoDialogTheme, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        dueDate.set(Calendar.MINUTE, minute);
-                        dueTextView.setText(Utils.formatCalendarLong(dueDate));
-                    }
-                }, 23, 59, false).show();
+                dueTextView.setText(Utils.formatCalendarDate(dueDate));
             }
         }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
     }

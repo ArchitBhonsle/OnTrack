@@ -10,7 +10,7 @@ import java.util.List;
 
 @Dao
 public interface HabitDao {
-    @Query("SELECT * FROM habit")
+    @Query("SELECT * FROM habit ORDER BY lastMarked")
     List<Habit> getAll();
 
     @Query("SELECT * FROM habit WHERE id IN (:ids)")

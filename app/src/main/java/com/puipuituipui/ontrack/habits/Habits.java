@@ -2,11 +2,9 @@ package com.puipuituipui.ontrack.habits;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
@@ -19,8 +17,6 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class Habits extends Fragment {
@@ -59,7 +55,7 @@ public class Habits extends Fragment {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                fabClick(view.getContext());
+                openAddDialog(view.getContext());
             }
         });
 
@@ -74,10 +70,10 @@ public class Habits extends Fragment {
         return db.habitDao().getAll();
     }
 
-    private void fabClick(Context ctx) {
+    private void openAddDialog(Context ctx) {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
-                .allowMainThreadQueries()    // TODO Fix this later
+                .allowMainThreadQueries()
                 .build();
 
         BottomSheetDialog dialog = new BottomSheetDialog(ctx);
@@ -110,4 +106,5 @@ public class Habits extends Fragment {
 
         dialog.show();
     }
+
 }

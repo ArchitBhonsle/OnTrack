@@ -65,7 +65,7 @@ public class TodosListAdapter extends BaseAdapter {
         state.setImageDrawable(icon);
 
         TextView due = (TextView) convertView.findViewById(R.id.todo_list_due);
-        if (todo.due != null) due.setText(Utils.formatCalendarDate(todo.due));
+        due.setText(Utils.formatCalendarDateShort(todo.due));
 
         RelativeLayout markArea = convertView.findViewById(R.id.todo_list_mark);
         markArea.setOnLongClickListener(new View.OnLongClickListener() {
@@ -84,7 +84,9 @@ public class TodosListAdapter extends BaseAdapter {
                         .allowMainThreadQueries()
                         .build();
                 db.todoDao().updateTodos(todo);
-                notifyDataSetChanged();
+
+                List<Todo> todos = db.todoDao().getAll();
+                setData(todos);
 
                 return true;
             }

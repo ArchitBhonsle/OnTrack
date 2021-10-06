@@ -10,7 +10,7 @@ import java.util.List;
 
 @Dao
 public interface TodoDao {
-    @Query("SELECT * FROM todo")
+    @Query("SELECT * FROM todo ORDER BY state, due")
     List<Todo> getAll();
 
     @Query("SELECT * FROM todo WHERE id IN (:ids)")

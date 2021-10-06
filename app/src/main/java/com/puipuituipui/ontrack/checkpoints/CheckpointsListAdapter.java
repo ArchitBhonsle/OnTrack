@@ -66,7 +66,7 @@ public class CheckpointsListAdapter extends BaseAdapter{
 
         TextView due = (TextView) convertView.findViewById(R.id.checkpoint_list_due);
         if (checkpoint.due != null) {
-            due.setText(Utils.formatCalendarDate(checkpoint.due));
+            due.setText(Utils.formatCalendarDateShort(checkpoint.due));
         }
 
         RelativeLayout markArea = convertView.findViewById(R.id.checkpoint_list_mark);

@@ -6,12 +6,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.room.Room;
 
+import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
 
@@ -77,6 +80,7 @@ public class HabitsListAdapter extends BaseAdapter {
             public void onClick(View view) {
                 Log.i("Habits", "Clicked");
                 Log.i("Habits", habit.toString());
+                openEditDialog(context, habit);
             }
         });
 
@@ -86,5 +90,65 @@ public class HabitsListAdapter extends BaseAdapter {
     public void setData(List<Habit> habits) {
         this.habits = habits;
         this.notifyDataSetChanged();
+    }
+
+    private void openEditDialog(Context ctx, Habit habit) {
+        AppDatabase db = Room.databaseBuilder(
+                ctx.getApplicationContext(), AppDatabase.class, "db")
+                .allowMainThreadQueries()
+                .build();
+
+        BottomSheetDialog dialog = new BottomSheetDialog(ctx);
+        dialog.setContentView(R.layout.dialog_edit_habit);
+
+        ImageButton delete = dialog.findViewById(R.id.delete_habit);
+        ImageButton mark = dialog.findViewById(R.id.mark_habit);
+        ImageButton change = dialog.findViewById(R.id.change_habit);
+        EditText name = dialog.findViewById(R.id.name_habit);
+        name.setText(habit.name);
+        EditText desc = dialog.findViewById(R.id.desc_habit);
+        desc.setText(habit.description);
+
+        mark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habit.mark();
+                db.habitDao().updateHabits(habit);
+
+                List<Habit> newHabits = db.habitDao().getAll();
+                setData(newHabits);
+
+                dialog.cancel();
+            }
+        });
+
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                db.habitDao().delete(habit);
+
+                List<Habit> newHabits = db.habitDao().getAll();
+                setData(newHabits);
+
+                dialog.cancel();
+            }
+        });
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                habit.name = name.getText().toString();
+                habit.description = desc.getText().toString();
+
+                db.habitDao().updateHabits(habit);
+
+                List<Habit> newHabits = db.habitDao().getAll();
+                setData(newHabits);
+
+                dialog.cancel();
+            }
+        });
+
+        dialog.show();
     }
 }

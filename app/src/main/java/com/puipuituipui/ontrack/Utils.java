@@ -4,8 +4,13 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class Utils {
-    public static String formatCalendarDate(Calendar cal) {
+    public static String formatCalendarDateShort(Calendar cal) {
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM");
+        return formatter.format(cal.getTime());
+    }
+
+    public static String formatCalendarDate(Calendar cal) {
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy");
         return formatter.format(cal.getTime());
     }
 
