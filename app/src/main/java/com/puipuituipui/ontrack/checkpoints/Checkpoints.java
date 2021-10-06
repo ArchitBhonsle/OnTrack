@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.R;
+import com.puipuituipui.ontrack.Utils;
 
 import java.util.Calendar;
 import java.util.List;
@@ -86,11 +88,11 @@ public class Checkpoints extends Fragment {
         EditText desc = dialog.findViewById(R.id.desc_checkpoint);
         TextView due = dialog.findViewById(R.id.due_checkpoint);
 
-        due.setText("Set due date (optional)");
+        due.setText("Set Date");
         due.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                setDueDate(ctx);
+                setDueDate(ctx, due);
             }
         });
 
@@ -120,14 +122,16 @@ public class Checkpoints extends Fragment {
         dialog.show();
     }
 
-    private void setDueDate(Context context) {
+    private void setDueDate(Context context, TextView dueTextView) {
         dueDate = Calendar.getInstance();
         dueDate.set(Calendar.HOUR_OF_DAY, 23);
 
-        new DatePickerDialog(context, R.style.TodoDialogTheme, (view, year, monthOfYear, dayOfMonth) ->
-                dueDate.set(year, monthOfYear, dayOfMonth),
-                dueDate.get(Calendar.YEAR),
-                dueDate.get(Calendar.MONTH),
-                dueDate.get(Calendar.DATE)).show();
+        new DatePickerDialog(context, R.style.CheckpointDialogTheme, new DatePickerDialog.OnDateSetListener(){
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int day) {
+                dueDate.set(year, month, day);
+                dueTextView.setText(Utils.formatCalendarLong(dueDate));
+            }
+        }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
     }
 }

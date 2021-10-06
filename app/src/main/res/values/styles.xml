@@ -10,9 +10,6 @@
         <item name="colorControlActivated">@color/habits</item>
         <item name="colorControlHighlight">@color/gray</item>
     </style>
-    <style name="TodoDialogTheme" parent="Theme.AppCompat.Light.Dialog">
-        <item name="colorAccent">@color/todos</item>
-    </style>
     <style name="CheckpointEditText" parent="Theme.AppCompat.Light.DarkActionBar">
         <item name="colorControlNormal">@color/gray</item>
         <item name="colorControlActivated">@color/checkpoints</item>
@@ -23,4 +20,15 @@
         <item name="colorControlActivated">@color/reminders</item>
         <item name="colorControlHighlight">@color/gray</item>
     </style>
+
+    <style name="TodoDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/todos</item>
+    </style>
+    <style name="CheckpointDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/checkpoints</item>
+    </style>
+    <style name="ReminderDialogTheme" parent="Theme.AppCompat.Light.Dialog">
+        <item name="colorAccent">@color/reminders</item>
+    </style>
+
 </resources>
