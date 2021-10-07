@@ -53,6 +53,7 @@ public class CheckpointsListAdapter extends BaseAdapter{
         }
 
         Checkpoint checkpoint = getItem(position);
+        checkpoint.completed();
 
         TextView name = (TextView) convertView.findViewById(R.id.checkpoint_list_name);
         name.setText(checkpoint.name);
@@ -73,13 +74,6 @@ public class CheckpointsListAdapter extends BaseAdapter{
         markArea.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if (checkpoint.state) {
-                    checkpoint.state = false;
-                    checkpoint.marked = null;
-                } else {
-                    checkpoint.state = true;
-                    checkpoint.marked = Calendar.getInstance();
-                }
 
                 AppDatabase db = Room.databaseBuilder(
                         context.getApplicationContext(), AppDatabase.class, "db")
