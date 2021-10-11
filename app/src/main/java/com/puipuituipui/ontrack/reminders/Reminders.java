@@ -57,16 +57,14 @@ public class Reminders extends Fragment {
         View view = inflater.inflate(R.layout.fragment_reminders, container, false);
 
         remindersList = view.findViewById(R.id.reminders_list);
-        adapter = new RemindersListAdapter(view.getContext(), refreshReminders());
+        adapter = new RemindersListAdapter(
+                view.getContext(),
+                refreshReminders()
+        );
         remindersList.setAdapter(adapter);
 
         fab = view.findViewById(R.id.reminder_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fabClick(view.getContext());
-            }
-        });
+        fab.setOnClickListener(view1 -> openAddDialog(view1.getContext()));
 
         return view;
     }
@@ -79,7 +77,7 @@ public class Reminders extends Fragment {
         return db.reminderDao().getAll();
     }
 
-    private void fabClick(Context ctx) {
+    private void openAddDialog(Context ctx) {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
                 .allowMainThreadQueries()
@@ -95,57 +93,46 @@ public class Reminders extends Fragment {
         EditText desc = dialog.findViewById(R.id.desc_reminder);
         TextView dueTime = dialog.findViewById(R.id.time_reminder);
 
-        dueTime.setText("Set due date (optional)");
-        dueTime.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setTime(ctx, dueTime);
-            }
+        dueDate = Utils.tomorrow();
+        dueTime.setText(Utils.formatCalendarLong(dueDate));
+        dueTime.setOnClickListener(view -> setTime(ctx, dueTime));
+
+        add.setOnClickListener(view -> {
+            Reminder current = new Reminder(
+                    name.getText().toString(),
+                    desc.getText().toString(),
+                    dueDate);
+            db.reminderDao().insertAll(current);
+            List<Reminder> newReminders = refreshReminders();
+            adapter.setData(newReminders);
+
+            dialog.cancel();
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Reminder current = new Reminder(
-                        name.getText().toString(),
-                        desc.getText().toString(),
-                        dueDate);
-                db.reminderDao().insertAll(current);
-                List<Reminder> newReminders = refreshReminders();
-                adapter.setData(newReminders);
-
-                dialog.cancel();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.cancel();
-            }
-        });
+        cancel.setOnClickListener(view -> dialog.cancel());
 
         dialog.show();
     }
 
     private void setTime(Context context, TextView timeTextView) {
-        dueDate = Calendar.getInstance();
-        dueDate.set(Calendar.HOUR_OF_DAY, 23);
-        dueDate.set(Calendar.MINUTE, 59);
-
-        new DatePickerDialog(context, R.style.ReminderDialogTheme, new DatePickerDialog.OnDateSetListener() {
-            @Override
-            public void onDateSet(DatePicker view, int year, int monthOfYear, int dayOfMonth) {
-                dueDate.set(year, monthOfYear, dayOfMonth);
-                new TimePickerDialog(context, R.style.ReminderDialogTheme, new TimePickerDialog.OnTimeSetListener() {
-                    @Override
-                    public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
-                        dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        dueDate.set(Calendar.MINUTE, minute);
-                        timeTextView.setText(Utils.formatCalendarLong(dueDate));
-                    }
-                }, 23, 59, false).show();
-            }
-        }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
+          new DatePickerDialog(context,
+                R.style.ReminderDialogTheme,
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    dueDate.set(year, monthOfYear, dayOfMonth);
+                    new TimePickerDialog(context,
+                            R.style.ReminderDialogTheme,
+                            (view1, hourOfDay, minute) -> {
+                                dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                dueDate.set(Calendar.MINUTE, minute);
+                                timeTextView.setText(Utils.formatCalendarLong(dueDate));
+                            },
+                            dueDate.get(Calendar.HOUR_OF_DAY),
+                            dueDate.get(Calendar.MINUTE),
+                            false).show();
+                },
+                dueDate.get(Calendar.YEAR),
+                dueDate.get(Calendar.MONTH),
+                dueDate.get(Calendar.DATE)).show();
     }
+
 }

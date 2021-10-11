@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    >
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -20,7 +20,7 @@
             android:fontFamily="@font/nunito_bold"
             android:textColor="@color/reminders"
             android:textSize="30sp"
-            android:text="Add Reminder" />
+            android:text="Edit Reminder" />
         <EditText
             android:id="@+id/name_reminder"
             android:theme="@style/ReminderEditText"
@@ -50,39 +50,41 @@
                 android:layout_marginEnd="10dp"
                 android:textSize="18sp"
                 android:text="Due:" />
+
             <TextView
-                android:id="@+id/time_reminder"
+                android:id="@+id/due_reminder"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="18sp"
+                android:background="@drawable/underline"
                 android:paddingBottom="10dp"
                 android:textColor="@color/gray"
-                android:background="@drawable/underline" />
+                android:textSize="18sp" />
         </LinearLayout>
     </LinearLayout>
 
     <RelativeLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="75dp">
         <ImageButton
-            android:id="@+id/cancel_reminder"
+            android:id="@+id/delete_reminder"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
+            android:padding="30dp"
             android:layout_alignParentStart="true"
-            android:padding="30dp"
-            android:src="@drawable/ic_baseline_arrow_back_24"
+            android:gravity="center"
+            android:src="@drawable/ic_baseline_delete_outline_24"
             android:background="@color/white"
-            android:contentDescription="cancel" />
+            android:contentDescription="delete" />
         <ImageButton
-            android:id="@+id/add_reminder"
+            android:id="@+id/change_reminder"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:layout_alignParentEnd="true"
             android:padding="30dp"
-            android:src="@drawable/ic_baseline_add_24"
+            android:layout_alignParentEnd="true"
+            android:gravity="center"
+            android:src="@drawable/ic_baseline_check_24"
             android:background="@color/white"
-            android:contentDescription="add"
-            app:tint="@color/reminders" />
+            android:contentDescription="change" />
     </RelativeLayout>
 
 </LinearLayout>
