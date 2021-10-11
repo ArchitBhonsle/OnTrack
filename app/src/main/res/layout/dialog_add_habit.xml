@@ -36,7 +36,6 @@
             android:hint="Description"
             android:inputType="text|textMultiLine|textCapSentences"
             android:gravity="top"
-            android:layout_marginBottom="@dimen/dialog_padding"
             android:padding="10dp"
             android:background="@drawable/border" />
     </LinearLayout>

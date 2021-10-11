@@ -1,9 +1,6 @@
 package com.puipuituipui.ontrack;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
-import androidx.viewpager2.widget.ViewPager2;
-
+import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
@@ -12,6 +9,10 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
@@ -23,35 +24,35 @@ public class MainActivity extends AppCompatActivity {
     ImageButton settings;
 
     private int chooseTabColor(int position) {
-            switch (position) {
-                case 0:
-                    return ContextCompat.getColor(getBaseContext(), R.color.todos);
-                case 1:
-                    return ContextCompat.getColor(getBaseContext(), R.color.habits);
-                case 2:
-                    return ContextCompat.getColor(getBaseContext(), R.color.reminders);
-                case 3:
-                    return ContextCompat.getColor(getBaseContext(), R.color.checkpoints);
-                default:
-                    return ContextCompat.getColor(getBaseContext(), R.color.gray);
+        switch (position) {
+            case 0:
+                return ContextCompat.getColor(getBaseContext(), R.color.todos);
+            case 1:
+                return ContextCompat.getColor(getBaseContext(), R.color.habits);
+            case 2:
+                return ContextCompat.getColor(getBaseContext(), R.color.reminders);
+            case 3:
+                return ContextCompat.getColor(getBaseContext(), R.color.checkpoints);
+            default:
+                return ContextCompat.getColor(getBaseContext(), R.color.gray);
         }
     }
 
     private int chooseTabIcon(int position) {
-            switch (position) {
-                case 0:
-                    return R.drawable.ic_baseline_check_circle_outline_24;
-                case 1:
-                    return R.drawable.ic_baseline_loop_24;
-                case 2:
-                    return R.drawable.ic_baseline_access_alarm_24;
-                case 3:
-                    return R.drawable.ic_baseline_outlined_flag_24;
-                default:  // handle this properly
-                    return R.drawable.ic_baseline_check_circle_outline_24;
+        switch (position) {
+            case 0:
+                return R.drawable.ic_baseline_check_circle_outline_24;
+            case 1:
+                return R.drawable.ic_baseline_loop_24;
+            case 2:
+                return R.drawable.ic_baseline_access_alarm_24;
+            case 3:
+                return R.drawable.ic_baseline_outlined_flag_24;
+            default:  // handle this properly
+                return R.drawable.ic_baseline_check_circle_outline_24;
 
-            }
         }
+    }
 
     private void setupPagerAndTabs(TextView title, TabLayout tabs, ViewPager2 pager) {
         pager.setAdapter(new CollectionAdapter(this));
@@ -76,25 +77,26 @@ public class MainActivity extends AppCompatActivity {
 
         // changing colors based on the current tab
         tabs.addOnTabSelectedListener(
-            new TabLayout.OnTabSelectedListener() {
-                @Override
-                public void onTabSelected(TabLayout.Tab tab) {
-                    int tabColor = chooseTabColor(tab.getPosition());
-                    ImageView currentView = (ImageView) tab.getCustomView();
-                    currentView.setColorFilter(tabColor, PorterDuff.Mode.SRC_IN);
-                    title.setTextColor(tabColor);
-                }
+                new TabLayout.OnTabSelectedListener() {
+                    @Override
+                    public void onTabSelected(TabLayout.Tab tab) {
+                        int tabColor = chooseTabColor(tab.getPosition());
+                        ImageView currentView = (ImageView) tab.getCustomView();
+                        currentView.setColorFilter(tabColor, PorterDuff.Mode.SRC_IN);
+                        title.setTextColor(tabColor);
+                    }
 
-                @Override
-                public void onTabUnselected(TabLayout.Tab tab) {
-                    int tabColor = ContextCompat.getColor(getBaseContext(), R.color.gray);
-                    ImageView currentView = (ImageView) tab.getCustomView();
-                    currentView.setColorFilter(tabColor, PorterDuff.Mode.SRC_IN);
-                }
+                    @Override
+                    public void onTabUnselected(TabLayout.Tab tab) {
+                        int tabColor = ContextCompat.getColor(getBaseContext(), R.color.gray);
+                        ImageView currentView = (ImageView) tab.getCustomView();
+                        currentView.setColorFilter(tabColor, PorterDuff.Mode.SRC_IN);
+                    }
 
-                @Override
-                public void onTabReselected(TabLayout.Tab tab) {}
-            }
+                    @Override
+                    public void onTabReselected(TabLayout.Tab tab) {
+                    }
+                }
         );
     }
 
@@ -120,5 +122,12 @@ public class MainActivity extends AppCompatActivity {
 
         setupPagerAndTabs(title, tabs, pager);
         setupSettings(settings);
+
+        NotificationsHelper.createNotificationChannel(
+                this,
+                NotificationManager.IMPORTANCE_DEFAULT,
+                false,
+                "Notifications to keep you On Track"
+        );
     }
 }

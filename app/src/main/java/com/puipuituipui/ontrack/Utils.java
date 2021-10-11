@@ -23,4 +23,14 @@ public class Utils {
         SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
         return  formatter.format(cal.getTime());
     }
+
+    public static Calendar todayEnd() {
+        Calendar today = Calendar.getInstance();
+        today.set(Calendar.HOUR_OF_DAY, 23);
+        today.set(Calendar.MINUTE, 59);
+        today.set(Calendar.SECOND, 59);
+        today.set(Calendar.MILLISECOND, 99);
+
+        return today;
+    }
 }

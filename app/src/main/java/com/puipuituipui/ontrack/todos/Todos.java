@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.android.material.bottomsheet.BottomSheetDialog;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.puipuituipui.ontrack.AppDatabase;
+import com.puipuituipui.ontrack.NotificationsHelper;
 import com.puipuituipui.ontrack.R;
 import com.puipuituipui.ontrack.Utils;
 
@@ -64,6 +65,8 @@ public class Todos extends Fragment {
             }
         });
 
+        NotificationsHelper.fireTodoNotifs(getContext());
+
         return view;
     }
 
@@ -90,9 +93,7 @@ public class Todos extends Fragment {
         EditText desc = dialog.findViewById(R.id.desc_todo);
         TextView due = dialog.findViewById(R.id.due_todo);
 
-        dueDate = Calendar.getInstance();
-        dueDate.set(Calendar.HOUR_OF_DAY, 23);
-        dueDate.set(Calendar.MINUTE, 59);
+        dueDate = Utils.todayEnd();
         due.setText(Utils.formatCalendarDate(dueDate));
         due.setOnClickListener(new View.OnClickListener() {
             @Override

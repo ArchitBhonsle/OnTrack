@@ -6,6 +6,7 @@ import androidx.room.Insert;
 import androidx.room.Query;
 import androidx.room.Update;
 
+import java.util.Calendar;
 import java.util.List;
 
 @Dao
@@ -13,8 +14,8 @@ public interface TodoDao {
     @Query("SELECT * FROM todo ORDER BY state, due")
     List<Todo> getAll();
 
-    @Query("SELECT * FROM todo WHERE id IN (:ids)")
-    List<Todo> loadAllByIds(int[] ids);
+    @Query("SELECT * FROM todo WHERE (NOT state) AND due <= (:today)")
+    List<Todo> getOnDate(Calendar today);
 
     @Insert
     List<Long> insertAll(Todo... todos);

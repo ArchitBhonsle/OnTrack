@@ -13,9 +13,6 @@ public interface HabitDao {
     @Query("SELECT * FROM habit ORDER BY lastMarked")
     List<Habit> getAll();
 
-    @Query("SELECT * FROM habit WHERE id IN (:ids)")
-    List<Habit> loadAllByIds(int[] ids);
-
     @Insert
     List<Long> insertAll(Habit... habits);
 
