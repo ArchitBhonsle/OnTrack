@@ -16,7 +16,7 @@ import com.puipuituipui.ontrack.reminders.ReminderDao;
 import com.puipuituipui.ontrack.todos.Todo;
 import com.puipuituipui.ontrack.todos.TodoDao;
 
-@Database(entities = {Habit.class, Todo.class, Checkpoint.class, Reminder.class}, version = 1)
+@Database(entities = {Habit.class, Todo.class, Checkpoint.class, Reminder.class}, version = 1, exportSchema = false)
 @TypeConverters({Converters.class})
 public abstract class AppDatabase extends RoomDatabase {
     public abstract HabitDao habitDao();

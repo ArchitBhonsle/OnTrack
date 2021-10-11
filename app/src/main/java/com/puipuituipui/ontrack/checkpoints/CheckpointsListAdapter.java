@@ -71,20 +71,6 @@ public class CheckpointsListAdapter extends BaseAdapter{
         }
 
         RelativeLayout markArea = convertView.findViewById(R.id.checkpoint_list_mark);
-        markArea.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-
-                AppDatabase db = Room.databaseBuilder(
-                        context.getApplicationContext(), AppDatabase.class, "db")
-                        .allowMainThreadQueries()
-                        .build();
-                db.checkpointDao().updateCheckpoints(checkpoint);
-                notifyDataSetChanged();
-
-                return true;
-            }
-        });
         markArea.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

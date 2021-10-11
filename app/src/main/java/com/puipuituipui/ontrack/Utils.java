@@ -15,12 +15,12 @@ public class Utils {
     }
 
     public static String formatCalendarLong(Calendar cal) {
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm:ss");
+        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy, hh:mm aa");
         return formatter.format(cal.getTime());
     }
 
     public static String formatCalenderTime(Calendar cal) {
-        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm");
+        SimpleDateFormat formatter = new SimpleDateFormat("hh:mm aa");
         return  formatter.format(cal.getTime());
     }
 
@@ -32,5 +32,11 @@ public class Utils {
         today.set(Calendar.MILLISECOND, 99);
 
         return today;
+    }
+
+    public static Calendar tomorrow() {
+        Calendar tomorrow = Calendar.getInstance();
+        tomorrow.add(Calendar.DATE, 1);
+        return tomorrow;
     }
 }

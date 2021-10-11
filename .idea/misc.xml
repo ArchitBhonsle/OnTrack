@@ -3,7 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/dialog_edit_reminder.xml" value="0.36666666666666664" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.3828125" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.3828125" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/drawable/ic_baseline_alarm_on_24.xml" value="0.3537037037037037" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/dialog_add_habit.xml" value="0.3052536231884058" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/dialog_add_reminder.xml" value="0.5" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/dialog_edit_checkpoint.xml" value="0.13157894736842105" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/dialog_edit_habit.xml" value="0.23737373737373738" />
+        <entry key="..\:/Arpit/Apps/OnTrack/app/src/main/res/layout/dialog_edit_reminder.xml" value="0.273972602739726" />
         <entry key="app/src/main/res/drawable/ic_baseline_access_alarm_24.xml" value="0.34322916666666664" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_30.xml" value="0.11203703703703703" />
         <entry key="app/src/main/res/drawable/ic_baseline_add_40.xml" value="0.10648148148148148" />
