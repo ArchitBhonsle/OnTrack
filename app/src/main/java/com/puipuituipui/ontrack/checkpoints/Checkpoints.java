@@ -25,11 +25,12 @@ import com.puipuituipui.ontrack.Utils;
 import java.util.Calendar;
 import java.util.List;
 
+
 public class Checkpoints extends Fragment {
     ListView checkpointsList;
     CheckpointsListAdapter adapter;
     FloatingActionButton fab;
-    Calendar dueDate;
+    Calendar date;
 
     List<Checkpoint> checkpoints;
 
@@ -51,17 +52,16 @@ public class Checkpoints extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_checkpoints, container, false);
+
         checkpointsList = view.findViewById(R.id.checkpoints_list);
-        adapter = new CheckpointsListAdapter(view.getContext(), refreshCheckpoints());
+        adapter = new CheckpointsListAdapter(view.getContext(),
+                refreshCheckpoints()
+        );
         checkpointsList.setAdapter(adapter);
 
         fab = view.findViewById(R.id.checkpoints_fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                fabClick(view.getContext());
-            }
-        });
+        fab.setOnClickListener(view1 -> openAddDialog(view1.getContext()));
+
         return view;
     }
 
@@ -73,7 +73,7 @@ public class Checkpoints extends Fragment {
         return db.checkpointDao().getAll();
     }
 
-    private void fabClick(Context ctx) {
+    private void openAddDialog(Context ctx) {
         AppDatabase db = Room.databaseBuilder(
                 getActivity().getApplicationContext(), AppDatabase.class, "db")
                 .allowMainThreadQueries()
@@ -86,52 +86,41 @@ public class Checkpoints extends Fragment {
         Button cancel = dialog.findViewById(R.id.cancel_checkpoint);
         EditText name = dialog.findViewById(R.id.name_checkpoint);
         EditText desc = dialog.findViewById(R.id.desc_checkpoint);
-        TextView due = dialog.findViewById(R.id.due_checkpoint);
+        TextView schedule = dialog.findViewById(R.id.due_checkpoint);
 
-        due.setText("Set Date");
-        due.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                setDueDate(ctx, due);
-            }
+        date = Utils.tomorrow();
+        schedule.setText(Utils.formatCalendarDate(date));
+        schedule.setOnClickListener(view -> setDate(ctx, schedule));
+
+        add.setOnClickListener(view -> {
+            Checkpoint current = new Checkpoint(
+                    name.getText().toString(),
+                    desc.getText().toString(),
+                    date);
+            db.checkpointDao().insertAll(current);
+
+            List<Checkpoint> newCheckpoints = refreshCheckpoints();
+            adapter.setData(newCheckpoints);
+
+            dialog.cancel();
         });
 
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Checkpoint current = new Checkpoint(
-                        name.getText().toString(),
-                        desc.getText().toString(),
-                        dueDate);
-                db.checkpointDao().insertAll(current);
-
-                List<Checkpoint> newCheckpoints = refreshCheckpoints();
-                adapter.setData(newCheckpoints);
-
-                dialog.cancel();
-            }
-        });
-
-        cancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                dialog.cancel();
-            }
-        });
+        cancel.setOnClickListener(view -> dialog.cancel());
 
         dialog.show();
     }
 
-    private void setDueDate(Context context, TextView dueTextView) {
-        dueDate = Calendar.getInstance();
-        dueDate.set(Calendar.HOUR_OF_DAY, 23);
-
-        new DatePickerDialog(context, R.style.CheckpointDialogTheme, new DatePickerDialog.OnDateSetListener(){
-            @Override
-            public void onDateSet(DatePicker view, int year, int month, int day) {
-                dueDate.set(year, month, day);
-                dueTextView.setText(Utils.formatCalendarLong(dueDate));
-            }
-        }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
+    private void setDate(Context context, TextView dueTextView) {
+        date = Calendar.getInstance();
+        date.set(Calendar.HOUR_OF_DAY, 23);
+        new DatePickerDialog(context,
+                R.style.CheckpointDialogTheme,
+                (view, year, month, day) -> {
+                    date.set(year, month, day);
+                    dueTextView.setText(Utils.formatCalendarDate(date));
+                },
+                date.get(Calendar.YEAR),
+                date.get(Calendar.MONTH),
+                date.get(Calendar.DATE)).show();
     }
 }

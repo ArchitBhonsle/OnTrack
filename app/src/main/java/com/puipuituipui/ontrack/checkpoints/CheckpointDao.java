@@ -14,7 +14,7 @@ public interface CheckpointDao {
     @Query("SELECT * FROM checkpoint")
     List<Checkpoint> getAll();
 
-    @Query("SELECT * FROM checkpoint WHERE due >= (:todayStart) AND due <= (:todayEnd)")
+    @Query("SELECT * FROM checkpoint WHERE date >= (:todayStart) AND date <= (:todayEnd)")
     List<Checkpoint> getOnDate(Calendar todayStart, Calendar todayEnd);
 
     @Query("SELECT * FROM checkpoint WHERE id IN (:ids)")

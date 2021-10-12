@@ -60,7 +60,7 @@
         </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="75dp">
         <ImageButton
@@ -69,29 +69,20 @@
             android:layout_height="match_parent"
             android:padding="30dp"
             android:gravity="center"
+            android:layout_alignParentStart="true"
             android:src="@drawable/ic_baseline_delete_outline_24"
             android:background="@color/white"
             android:contentDescription="delete" />
-        <ImageButton
-            android:id="@+id/mark_checkpoint"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:padding="30dp"
-            android:layout_weight="1"
-            android:gravity="center"
-            android:src="@drawable/ic_baseline_outlined_flag_24"
-            android:background="@color/white"
-            android:contentDescription="mark"
-            app:tint="@color/checkpoints" />
         <ImageButton
             android:id="@+id/change_checkpoint"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:padding="30dp"
             android:gravity="center"
+            android:layout_alignParentEnd="true"
             android:src="@drawable/ic_baseline_check_24"
             android:background="@color/white"
             android:contentDescription="change" />
-    </LinearLayout>
+    </RelativeLayout>
 
 </LinearLayout>

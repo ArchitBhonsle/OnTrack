@@ -15,25 +15,25 @@ public class Checkpoint {
     public boolean state;
     public String name;
     public String description;
-    public Calendar due;
+    public Calendar date;
     public Calendar marked;
 
-    public Checkpoint(String name, String description, Calendar due) {
+    public Checkpoint(String name, String description, Calendar date) {
         this.state = false;
         this.name = name;
         this.description = description;
-        this.due = due;
+        this.date = date;
     }
 
     public boolean completed() {
-        if(this.due == null) {
+        if(this.date == null) {
             Log.i("Checkpoint:completed", "null case");
             Log.i("Checkpoint:completed",this.toString());
             return false;
         }
 
         Calendar today = Calendar.getInstance();
-        if (due.compareTo(today) < 0) {
+        if (date.compareTo(today) < 0) {
             Log.i("Checkpoint:completed", "check case");
             Log.i("Checkpoint:completed", this.toString());
             this.state = true;
@@ -51,7 +51,7 @@ public class Checkpoint {
                 ", state=" + state +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", due=" + due +
+                ", date=" + date +
                 ", marked=" + marked +
                 '}';
     }
