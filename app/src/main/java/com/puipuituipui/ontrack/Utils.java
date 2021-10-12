@@ -26,22 +26,28 @@ public class Utils {
 
     public static Calendar todayEnd() {
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 23);
-        today.set(Calendar.MINUTE, 59);
-        today.set(Calendar.SECOND, 59);
-        today.set(Calendar.MILLISECOND, 99);
-
+        setToEnd(today);
         return today;
     }
 
     public static Calendar todayStart() {
         Calendar today = Calendar.getInstance();
-        today.set(Calendar.HOUR_OF_DAY, 0);
-        today.set(Calendar.MINUTE, 0);
-        today.set(Calendar.SECOND, 0);
-        today.set(Calendar.MILLISECOND, 0);
-
+        setToStart(today);
         return today;
+    }
+
+    public static void setToStart(Calendar date) {
+        date.set(Calendar.HOUR_OF_DAY, 0);
+        date.set(Calendar.MINUTE, 0);
+        date.set(Calendar.SECOND, 0);
+        date.set(Calendar.MILLISECOND, 0);
+    }
+
+    public static void setToEnd(Calendar date) {
+        date.set(Calendar.HOUR_OF_DAY, 23);
+        date.set(Calendar.MINUTE, 59);
+        date.set(Calendar.SECOND, 59);
+        date.set(Calendar.MILLISECOND, 99);
     }
 
     public static Calendar tomorrow() {
