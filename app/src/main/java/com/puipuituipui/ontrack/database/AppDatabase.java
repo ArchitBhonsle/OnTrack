@@ -1,9 +1,6 @@
-package com.puipuituipui.ontrack;
-
-import android.content.Context;
+package com.puipuituipui.ontrack.database;
 
 import androidx.room.Database;
-import androidx.room.Room;
 import androidx.room.RoomDatabase;
 import androidx.room.TypeConverters;
 

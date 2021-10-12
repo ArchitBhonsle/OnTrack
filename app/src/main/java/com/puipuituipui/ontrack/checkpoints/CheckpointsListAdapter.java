@@ -12,13 +12,11 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.core.content.ContextCompat;
-import androidx.room.Room;
 
-import com.puipuituipui.ontrack.AppDatabase;
 import com.puipuituipui.ontrack.Utils;
 
 import com.puipuituipui.ontrack.R;
-import java.util.Calendar;
+
 import java.util.List;
 
 public class CheckpointsListAdapter extends BaseAdapter{

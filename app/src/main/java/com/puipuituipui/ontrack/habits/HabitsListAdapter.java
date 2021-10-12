@@ -8,14 +8,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.room.Room;
 
 import com.google.android.material.bottomsheet.BottomSheetDialog;
-import com.puipuituipui.ontrack.AppDatabase;
+import com.puipuituipui.ontrack.database.AppDatabase;
 import com.puipuituipui.ontrack.R;
 
 import java.util.List;

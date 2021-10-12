@@ -1,4 +1,4 @@
-package com.puipuituipui.ontrack;
+package com.puipuituipui.ontrack.database;
 
 import androidx.room.TypeConverter;
 

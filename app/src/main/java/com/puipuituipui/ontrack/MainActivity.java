@@ -2,8 +2,10 @@ package com.puipuituipui.ontrack;
 
 import android.app.NotificationManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -16,6 +18,10 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
+import com.puipuituipui.ontrack.notifs.AlarmScheduler;
+import com.puipuituipui.ontrack.notifs.NotificationsHelper;
+
+import java.util.Calendar;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tabs;
@@ -110,6 +116,48 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    private void setupNotifs() {
+        NotificationsHelper.createNotificationChannel(
+                this,
+                NotificationManager.IMPORTANCE_DEFAULT,
+                false,
+                NotificationsHelper.NOTIFICATION_CHANNEL_TODO,
+                NotificationsHelper.NOTIFICATION_CHANNEL_DESC_TODO
+        );
+        NotificationsHelper.createNotificationChannel(
+                this,
+                NotificationManager.IMPORTANCE_DEFAULT,
+                false,
+                NotificationsHelper.NOTIFICATION_CHANNEL_HABIT,
+                NotificationsHelper.NOTIFICATION_CHANNEL_DESC_HABIT
+        );
+        NotificationsHelper.createNotificationChannel(
+                this,
+                NotificationManager.IMPORTANCE_HIGH,
+                false,
+                NotificationsHelper.NOTIFICATION_CHANNEL_REMINDER,
+                NotificationsHelper.NOTIFICATION_CHANNEL_DESC_REMINDER
+        );
+        NotificationsHelper.createNotificationChannel(
+                this,
+                NotificationManager.IMPORTANCE_DEFAULT,
+                false,
+                NotificationsHelper.NOTIFICATION_CHANNEL_CHECKPOINT,
+                NotificationsHelper.NOTIFICATION_CHANNEL_DESC_CHECKPOINT
+        );
+
+        Calendar eightAM = Calendar.getInstance();
+        eightAM.set(Calendar.HOUR, 8);
+        eightAM.set(Calendar.MINUTE, 0);
+        eightAM.set(Calendar.SECOND, 0);
+        eightAM.set(Calendar.MILLISECOND, 0);
+        eightAM.set(Calendar.AM, 1);
+        AlarmScheduler.setRepeatingAlarm(
+                this,
+                eightAM,
+                AlarmScheduler.createPendingIntent(this, AlarmScheduler.ALARM_DAILY_TYPE));
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,11 +171,14 @@ public class MainActivity extends AppCompatActivity {
         setupPagerAndTabs(title, tabs, pager);
         setupSettings(settings);
 
-        NotificationsHelper.createNotificationChannel(
-                this,
-                NotificationManager.IMPORTANCE_DEFAULT,
-                false,
-                "Notifications to keep you On Track"
-        );
+        SharedPreferences sharedPreferences = getPreferences(MODE_PRIVATE);
+        boolean firstTime = sharedPreferences.getBoolean("FIRST_TIME", true);
+        if (firstTime) {
+            Log.i("MainActivity", "firstTime");
+            setupNotifs();
+            SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
+            sharedPreferencesEditor.putBoolean("FIRST_TIME", false);
+            sharedPreferencesEditor.apply();
+        }
     }
 }
