@@ -164,6 +164,16 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         title = findViewById(R.id.title_name);
+        title.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                NotificationsHelper.fireTodoNotifs(MainActivity.this);
+                NotificationsHelper.fireHabitNotifs(MainActivity.this);
+                NotificationsHelper.fireCheckpointNotifs(MainActivity.this);
+                return false;
+            }
+        });
+
         pager = findViewById(R.id.view_pager);
         tabs = findViewById(R.id.tabs);
         settings = findViewById(R.id.settings);

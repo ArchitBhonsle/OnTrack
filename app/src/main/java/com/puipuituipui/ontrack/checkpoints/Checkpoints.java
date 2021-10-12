@@ -126,7 +126,7 @@ public class Checkpoints extends Fragment {
         dueDate = Calendar.getInstance();
         dueDate.set(Calendar.HOUR_OF_DAY, 23);
 
-        new DatePickerDialog(context, R.style.CheckpointDialogTheme, new DatePickerDialog.OnDateSetListener(){
+        new DatePickerDialog(context, R.style.CheckpointDialogTheme, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int day) {
                 dueDate.set(year, month, day);

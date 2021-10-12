@@ -15,6 +15,9 @@ public interface ReminderDao {
     @Query("SELECT * FROM reminder")
     List<Reminder> getAll();
 
+    @Query("SELECT * FROM reminder WHERE id == (:id)")
+    Reminder getById(int id);
+
     @Query("SELECT * FROM reminder WHERE id IN (:ids)")
     List<Reminder> loadAllByIds(int[] ids);
 

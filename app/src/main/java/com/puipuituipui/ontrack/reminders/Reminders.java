@@ -1,5 +1,6 @@
 package com.puipuituipui.ontrack.reminders;
 
+import android.app.AlarmManager;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -21,6 +22,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.puipuituipui.ontrack.database.AppDatabase;
 import com.puipuituipui.ontrack.R;
 import com.puipuituipui.ontrack.Utils;
+import com.puipuituipui.ontrack.notifs.AlarmScheduler;
 
 import java.util.Calendar;
 import java.util.List;
@@ -99,7 +101,10 @@ public class Reminders extends Fragment {
                     name.getText().toString(),
                     desc.getText().toString(),
                     dueDate);
-            db.reminderDao().insertAll(current);
+
+            int inserted = Math.toIntExact(db.reminderDao().insertAll(current).get(0));
+            AlarmScheduler.setReminderAlarm(ctx, db.reminderDao().getById(inserted));
+
             List<Reminder> newReminders = refreshReminders();
             adapter.setData(newReminders);
 
