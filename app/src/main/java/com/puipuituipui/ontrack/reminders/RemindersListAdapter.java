@@ -69,9 +69,9 @@ public class RemindersListAdapter extends BaseAdapter {
         );
         state.setImageDrawable(icon);
 
-        TextView due = (TextView) convertView.findViewById(R.id.reminder_list_time);
-        if (reminder.time != null) {
-            due.setText(Utils.formatCalenderTime(reminder.time));
+        TextView time = (TextView) convertView.findViewById(R.id.reminder_list_time);
+        if (reminder.scheduled != null) {
+            time.setText(Utils.formatCalenderTime(reminder.scheduled));
         }
 
         RelativeLayout markArea = convertView.findViewById((R.id.reminder_list_mark));
@@ -97,16 +97,16 @@ public class RemindersListAdapter extends BaseAdapter {
         BottomSheetDialog dialog = new BottomSheetDialog(ctx);
         dialog.setContentView(R.layout.dialog_edit_reminder);
 
-        Calendar dueDate = reminder.time;
+        Calendar scheduledDate = reminder.scheduled;
 
         ImageButton delete = dialog.findViewById(R.id.delete_reminder);
         ImageButton change = dialog.findViewById(R.id.change_reminder);
         EditText name = dialog.findViewById(R.id.name_reminder);
         EditText desc = dialog.findViewById(R.id.desc_reminder);
-        TextView due = dialog.findViewById(R.id.due_reminder);
+        TextView scheduled = dialog.findViewById(R.id.due_reminder);
         name.setText(reminder.name);
         desc.setText(reminder.description);
-        due.setText(Utils.formatCalendarLong(dueDate));
+        scheduled.setText(Utils.formatCalendarLong(scheduledDate));
 
         delete.setOnClickListener(view -> {
             Log.i("Reminder","Delete");
@@ -117,10 +117,11 @@ public class RemindersListAdapter extends BaseAdapter {
             dialog.cancel();
         });
 
-        due.setOnClickListener(view -> setDueTime(ctx, due, dueDate));
+        scheduled.setOnClickListener(view -> rescheduleTime(ctx, scheduled, scheduledDate));
 
         change.setOnClickListener(view -> {
             Log.i("Reminder","Update");
+            reminder.completed();
             reminder.name = name.getText().toString();
             reminder.description = desc.getText().toString();
 
@@ -135,19 +136,24 @@ public class RemindersListAdapter extends BaseAdapter {
         dialog.show();
     }
 
-    private void setDueTime(Context context, TextView dueTextview, Calendar dueDate) {
-        new DatePickerDialog(context, R.style.ReminderDialogTheme, (view, year, monthOfYear, dayOfMonth) -> {
-            dueDate.set(year, monthOfYear, dayOfMonth);
-            new TimePickerDialog(context,
-                    R.style.ReminderDialogTheme,
-                    (view1, hourOfDay, minute) -> {
-                        dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                        dueDate.set(Calendar.MINUTE, minute);
-                        dueTextview.setText(Utils.formatCalendarLong(dueDate));
-                    },
-                    dueDate.get(Calendar.HOUR_OF_DAY),
-                    dueDate.get(Calendar.MINUTE),
-                    false).show();
-        }, dueDate.get(Calendar.YEAR), dueDate.get(Calendar.MONTH), dueDate.get(Calendar.DATE)).show();
+    private void rescheduleTime(Context context, TextView scheduledTextview, Calendar scheduledTime) {
+        new DatePickerDialog(context,
+                R.style.ReminderDialogTheme,
+                (view, year, monthOfYear, dayOfMonth) -> {
+                    scheduledTime.set(year, monthOfYear, dayOfMonth);
+                    new TimePickerDialog(context,
+                            R.style.ReminderDialogTheme,
+                            (view1, hourOfDay, minute) -> {
+                                scheduledTime.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                scheduledTime.set(Calendar.MINUTE, minute);
+                                scheduledTextview.setText(Utils.formatCalendarLong(scheduledTime));
+                            },
+                            scheduledTime.get(Calendar.HOUR_OF_DAY),
+                            scheduledTime.get(Calendar.MINUTE),
+                            false).show();
+                },
+                scheduledTime.get(Calendar.YEAR),
+                scheduledTime.get(Calendar.MONTH),
+                scheduledTime.get(Calendar.DATE)).show();
     }
 }

@@ -5,6 +5,8 @@ import android.util.Log;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
+import com.puipuituipui.ontrack.Utils;
+
 import java.util.Calendar;
 
 @Entity
@@ -15,18 +17,19 @@ public class Reminder {
     public boolean state;
     public String name;
     public String description;
-    public Calendar time;
+    public Calendar scheduled;
     public Calendar marked;
 
-    public Reminder(String name, String description,Calendar time) {
+    public Reminder(String name, String description,Calendar scheduled) {
         this.state = false;
         this.name = name;
         this.description = description;
-        this.time = time;
+        this.scheduled = scheduled;
+        this.marked = null;
     }
 
     public boolean completed() {
-        if (this.time == null) {
+        if (this.scheduled == null) {
             Log.i("Reminder:time", "null case");
             Log.i("Reminder:time",this.toString());
             this.state = true;
@@ -34,13 +37,14 @@ public class Reminder {
         }
 
         Calendar now = Calendar.getInstance();
-        if (time.compareTo(now) <= 0) {
+        if (scheduled.compareTo(now) <= 0) {
             Log.i("Reminder:completed", "deadline passed case");
-            Log.i("Reminder:completed", this.toString());
+            Log.i("Reminder:completed", Utils.formatCalendarLong(this.scheduled));
             this.state = true;
             return false;
         } else {
-            Log.i("Reminder:completed", "Safe case");
+            Log.i("Reminder:not complete", "deadline not passed");
+            this.state = false;
 //            int differenceInHours = (int) ((time.getTimeInMillis() - now.getTimeInMillis()) / (1000 * 60 * 60)) ;
 //            if (differenceInHours < 24) {
 //                Log.i("Reminder:completed", "urgent case");
@@ -49,7 +53,6 @@ public class Reminder {
         }
     }
 
-
     @Override
     public String toString() {
         return "Reminder{" +
@@ -57,9 +60,8 @@ public class Reminder {
                 ", state=" + state +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
-                ", time=" + time +
+                ", time=" + scheduled +
                 ", marked=" + marked +
                 '}';
     }
-
 }

@@ -32,7 +32,7 @@ public class Reminders extends Fragment {
     ListView remindersList;
     RemindersListAdapter adapter;
     FloatingActionButton fab;
-    Calendar dueDate;
+    Calendar scheduledDate;
 
     List<Reminder> reminders;
 
@@ -90,17 +90,17 @@ public class Reminders extends Fragment {
         ImageButton cancel = dialog.findViewById(R.id.cancel_reminder);
         EditText name = dialog.findViewById(R.id.name_reminder);
         EditText desc = dialog.findViewById(R.id.desc_reminder);
-        TextView dueTime = dialog.findViewById(R.id.time_reminder);
+        TextView scheduledTime = dialog.findViewById(R.id.time_reminder);
 
-        dueDate = Utils.tomorrow();
-        dueTime.setText(Utils.formatCalendarLong(dueDate));
-        dueTime.setOnClickListener(view -> setTime(ctx, dueTime));
+        scheduledDate = Utils.tomorrow();
+        scheduledTime.setText(Utils.formatCalendarLong(scheduledDate));
+        scheduledTime.setOnClickListener(view -> setTime(ctx, scheduledTime));
 
         add.setOnClickListener(view -> {
             Reminder current = new Reminder(
                     name.getText().toString(),
                     desc.getText().toString(),
-                    dueDate);
+                    scheduledDate);
 
             int inserted = Math.toIntExact(db.reminderDao().insertAll(current).get(0));
             AlarmScheduler.setReminderAlarm(ctx, db.reminderDao().getById(inserted));
@@ -120,21 +120,21 @@ public class Reminders extends Fragment {
           new DatePickerDialog(context,
                 R.style.ReminderDialogTheme,
                 (view, year, monthOfYear, dayOfMonth) -> {
-                    dueDate.set(year, monthOfYear, dayOfMonth);
+                    scheduledDate.set(year, monthOfYear, dayOfMonth);
                     new TimePickerDialog(context,
                             R.style.ReminderDialogTheme,
                             (view1, hourOfDay, minute) -> {
-                                dueDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
-                                dueDate.set(Calendar.MINUTE, minute);
-                                timeTextView.setText(Utils.formatCalendarLong(dueDate));
+                                scheduledDate.set(Calendar.HOUR_OF_DAY, hourOfDay);
+                                scheduledDate.set(Calendar.MINUTE, minute);
+                                timeTextView.setText(Utils.formatCalendarLong(scheduledDate));
                             },
-                            dueDate.get(Calendar.HOUR_OF_DAY),
-                            dueDate.get(Calendar.MINUTE),
+                            scheduledDate.get(Calendar.HOUR_OF_DAY),
+                            scheduledDate.get(Calendar.MINUTE),
                             false).show();
                 },
-                dueDate.get(Calendar.YEAR),
-                dueDate.get(Calendar.MONTH),
-                dueDate.get(Calendar.DATE)).show();
+                  scheduledDate.get(Calendar.YEAR),
+                  scheduledDate.get(Calendar.MONTH),
+                  scheduledDate.get(Calendar.DATE)).show();
     }
 
 }

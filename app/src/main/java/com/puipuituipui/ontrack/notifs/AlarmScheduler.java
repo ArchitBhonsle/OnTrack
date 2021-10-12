@@ -37,6 +37,6 @@ public class AlarmScheduler {
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(context.ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC_WAKEUP, reminder.time.getTimeInMillis(), pendingIntent);
+        alarmManager.set(AlarmManager.RTC_WAKEUP, reminder.scheduled.getTimeInMillis(), pendingIntent);
     }
 }
