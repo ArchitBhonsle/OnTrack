@@ -18,6 +18,7 @@ import com.puipuituipui.ontrack.MainActivity;
 import com.puipuituipui.ontrack.R;
 import com.puipuituipui.ontrack.Utils;
 import com.puipuituipui.ontrack.habits.Habit;
+import com.puipuituipui.ontrack.reminders.Reminder;
 import com.puipuituipui.ontrack.todos.Todo;
 
 import java.util.Calendar;
@@ -154,4 +155,34 @@ public class NotificationsHelper {
         });
     }
 
+    public static void fireReminderNotif(Context context, Long reminderId) {
+        Log.i("NotificationsHelper:fireReminderNotif", "here");
+        AppDatabase db = Room.databaseBuilder(
+                context.getApplicationContext(), AppDatabase.class, "db")
+                .allowMainThreadQueries()
+                .build();
+
+        Reminder reminder = db.reminderDao().getById(Math.toIntExact(reminderId));
+
+        int remindersColor = ContextCompat.getColor(context, R.color.reminders);
+
+        Intent intent = new Intent(context, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, intent, 0);
+
+        Notification.Builder notifBuilder = new Notification.Builder(
+                context,
+                getChannelId(context, NOTIFICATION_CHANNEL_CHECKPOINT))
+                .setSmallIcon(R.drawable.ic_baseline_alarm_on_24)
+                .setContentTitle(reminder.name)
+                .setAutoCancel(false)
+                .setColor(remindersColor)
+                .setContentIntent(pendingIntent);
+
+        if (reminder.description.length() != 0) notifBuilder.setContentText(reminder.description);
+
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        notificationManager.notify(Math.toIntExact(reminder.id), notifBuilder.build());
+    }
 }
