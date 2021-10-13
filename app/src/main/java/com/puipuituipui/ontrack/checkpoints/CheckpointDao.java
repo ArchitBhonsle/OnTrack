@@ -11,20 +11,17 @@ import java.util.List;
 
 @Dao
 public interface CheckpointDao {
-    @Query("SELECT * FROM checkpoint")
+    @Query("SELECT * FROM checkpoint ORDER BY state, date")
     List<Checkpoint> getAll();
 
     @Query("SELECT * FROM checkpoint WHERE date >= (:todayStart) AND date <= (:todayEnd)")
     List<Checkpoint> getOnDate(Calendar todayStart, Calendar todayEnd);
 
-    @Query("SELECT * FROM checkpoint WHERE id IN (:ids)")
-    List<Checkpoint> loadAllByIds(int[] ids);
-
     @Insert
     List<Long> insertAll(Checkpoint... checkpoints);
 
     @Update
-    int updateCheckpoints(Checkpoint... checkpoints);
+    void updateCheckpoints(Checkpoint... checkpoints);
 
     @Delete
     void delete(Checkpoint checkpoint);

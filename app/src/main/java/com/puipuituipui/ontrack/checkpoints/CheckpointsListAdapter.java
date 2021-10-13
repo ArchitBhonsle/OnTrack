@@ -124,6 +124,7 @@ public class CheckpointsListAdapter extends BaseAdapter{
             Log.i("Checkpoint","Update");
             checkpoint.name = name.getText().toString();
             checkpoint.description = desc.getText().toString();
+            checkpoint.completed();
 
             db.checkpointDao().updateCheckpoints(checkpoint);
 

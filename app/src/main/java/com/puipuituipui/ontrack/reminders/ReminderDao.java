@@ -12,7 +12,7 @@ import java.util.List;
 
 @Dao
 public interface ReminderDao {
-    @Query("SELECT * FROM reminder")
+    @Query("SELECT * FROM reminder ORDER BY state, scheduled")
     List<Reminder> getAll();
 
     @Query("SELECT * FROM reminder WHERE id == (:id)")

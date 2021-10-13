@@ -2,8 +2,11 @@ package com.puipuituipui.ontrack.checkpoints;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
+
+import com.puipuituipui.ontrack.Utils;
 
 import java.util.Calendar;
 
@@ -28,22 +31,24 @@ public class Checkpoint {
     public boolean completed() {
         if(this.date == null) {
             Log.i("Checkpoint:completed", "null case");
-            Log.i("Checkpoint:completed",this.toString());
+            Log.i("Checkpoint:completed",Utils.formatCalendarLong(this.date));
             return false;
         }
 
         Calendar today = Calendar.getInstance();
         if (date.compareTo(today) < 0) {
-            Log.i("Checkpoint:completed", "check case");
-            Log.i("Checkpoint:completed", this.toString());
+            Log.i("Checkpoint:completed", "date passed case");
+            Log.i("Checkpoint:completed", Utils.formatCalendarLong(this.date));
             this.state = true;
-        } else {
-            Log.i("Checkpoint:completed", "do nothing");
             return true;
+        } else {
+            Log.i("Checkpoint:not complete", "date not passed case");
+            this.state = false;
+            return false;
         }
-        return false;
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Checkpoint{" +

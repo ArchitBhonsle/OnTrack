@@ -2,6 +2,7 @@ package com.puipuituipui.ontrack.reminders;
 
 import android.util.Log;
 
+import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
@@ -31,7 +32,7 @@ public class Reminder {
     public boolean completed() {
         if (this.scheduled == null) {
             Log.i("Reminder:time", "null case");
-            Log.i("Reminder:time",this.toString());
+            Log.i("Reminder:time", Utils.formatCalendarLong(this.scheduled));
             this.state = true;
             return false;
         }
@@ -53,6 +54,7 @@ public class Reminder {
         }
     }
 
+    @NonNull
     @Override
     public String toString() {
         return "Reminder{" +
