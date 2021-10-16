@@ -147,11 +147,10 @@ public class MainActivity extends AppCompatActivity {
         );
 
         Calendar eightAM = Calendar.getInstance();
-        eightAM.set(Calendar.HOUR, 8);
+        eightAM.set(Calendar.HOUR_OF_DAY, 8);
         eightAM.set(Calendar.MINUTE, 0);
         eightAM.set(Calendar.SECOND, 0);
         eightAM.set(Calendar.MILLISECOND, 0);
-        eightAM.set(Calendar.AM, 1);
         AlarmScheduler.setRepeatingAlarm(
                 this,
                 eightAM,
