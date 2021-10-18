@@ -13,6 +13,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -59,7 +60,7 @@ public class Checkpoints extends Fragment {
         );
         checkpointsList.setAdapter(adapter);
 
-        fab = view.findViewById(R.id.checkpoints_fab);
+        fab = view.findViewById(R.id.checkpoint_fab);
         fab.setOnClickListener(view1 -> openAddDialog(view1.getContext()));
 
         return view;
@@ -82,8 +83,8 @@ public class Checkpoints extends Fragment {
         BottomSheetDialog dialog = new BottomSheetDialog(ctx);
         dialog.setContentView(R.layout.dialog_add_checkpoint);
 
-        Button add = dialog.findViewById(R.id.add_checkpoint);
-        Button cancel = dialog.findViewById(R.id.cancel_checkpoint);
+        ImageButton add = dialog.findViewById(R.id.add_checkpoint);
+        ImageButton cancel = dialog.findViewById(R.id.cancel_checkpoint);
         EditText name = dialog.findViewById(R.id.name_checkpoint);
         EditText desc = dialog.findViewById(R.id.desc_checkpoint);
         TextView schedule = dialog.findViewById(R.id.due_checkpoint);
